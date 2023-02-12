@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "An Embedding of Rust into Ruby using rutie"
   spec.description   = "Benchmark performance of Pure Ruby vs Ruby + Embedded Rust"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.0.0")
 
   spec.metadata["allowed_push_host"] = "git@github.com:nathanielBellamy/rustby.git"
   spec.metadata["source_code_uri"] = "https://github.com/nathanielBellamy/rustby"

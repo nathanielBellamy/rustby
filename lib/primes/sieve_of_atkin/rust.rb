@@ -1,14 +1,12 @@
+# frozen_string_literal: true
+
+require_relative "base"
+
 module SieveOfAtkin
-  class Rust
-    attr_reader :n, :k
-
-    def initialize(n: 2, k: 2)
-      @n = n
-      @k = k
-    end
-
-    # find all primes <= n
-    # => run it k times
+  # rust engine
+  class Rust < Base
+    # find all primes <= max
+    # => run it count times
     def run
       # TODO
       p "HELLO FROM RUST"

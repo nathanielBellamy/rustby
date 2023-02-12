@@ -1,12 +1,10 @@
+# frozen_string_literal: true
+
+require_relative "base.rb"
+
 module SieveOfAtkin
-  class Ruby
-    attr_reader :n, :k
-
-    def initialize(n: 2, k: 2)
-      @n = n
-      @k = k
-    end
-
+  # ruby engine
+  class Ruby < Base
     # find all primes <= n
     # => run it k times
     def run
