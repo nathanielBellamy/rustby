@@ -2,10 +2,14 @@
 
 require_relative "rustby/version"
 require_relative "primes/mod"
+require "rutie"
 
 # An Implimentation of Rust Within Ruby
 module Rustby
   class Error < StandardError; end
+
+  # init rust bridge
+  Rutie.new(:rustby).init 'Init_rustby', __dir__
 
   p " == Welcome to rustby == " \
     " == Rust Embedded in Ruby Using rutie (github/danielpclark/rutie) === "

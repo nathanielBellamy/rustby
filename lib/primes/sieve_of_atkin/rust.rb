@@ -9,7 +9,7 @@ module SieveOfAtkin
     # => run it count times
     def run
       # TODO
-      p "HELLO FROM RUST"
+      p RUST.hello
     end
   end
 end
