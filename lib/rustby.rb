@@ -14,12 +14,12 @@ module Rustby
   p " == Welcome to rustby == " \
     " == Rust Embedded in Ruby Using rutie (github/danielpclark/rutie) === "
 
-  # find all primes less than or equal to n in each language
+  # find all primes less than or equal to limit in each language
   # => run each program k times
   # => return results
   Primes::Benchmarker.new(
     alg_str: "sieve_of_atkin",
-    max: 1_000_000,
+    limit: 1_000_000,
     count: 5
   ).run
 end

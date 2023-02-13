@@ -7,7 +7,7 @@ module SieveOfAtkin
   class Rust < Base
     # find all primes <= max
     # => run it count times
-    def run
+    def self.run(limit)
       # TODO
       p RUST.hello
     end

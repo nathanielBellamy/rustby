@@ -9,15 +9,15 @@ module Primes
 
   # measure run time of different algorithms
   class Benchmarker
-    attr_reader :alg_str, :max, :count
+    attr_reader :alg_str, :limit, :count
 
-    def initialize(alg_str: "", max: 2, count: 5)
+    def initialize(alg_str: "", limit: 2, count: 5)
       @alg_str = alg_str
-      @max = max
+      @limit = limit
       @count = count
     end
 
-    # execute and time algorithm to find all primes <= max
+    # execute and time algorithm to find all primes <= limit
     # => run the algorithm count times in each language and take average
     # => compare results between ruby and rust
     def run
@@ -25,9 +25,9 @@ module Primes
 
       Benchmark.bm do |x|
         p "=====RUBY"
-        x.report { alg::Ruby.new(max: max, count: count).run }
+        x.report { alg::Ruby.run(limit) }
         p "=====RUST"
-        x.report { alg::Rust.new(max: max, count: count).run }
+        x.report { alg::Rust.run(limit) }
       end
     end
 
