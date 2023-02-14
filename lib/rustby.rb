@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "rustby/version"
-require_relative "primes/mod"
+require_relative "primes/benchmarker"
 require_relative "user_io/cli"
 require "rutie"
 
@@ -15,6 +15,7 @@ module Rustby
   cli = UserIO::Cli.new(ARGV)
   cli.intro_message
 
+  UserIO::Cli.benchmarking
   # find all primes less than or equal to limit in each language
   # => run each program k times
   # => return results
@@ -23,4 +24,6 @@ module Rustby
     limit: cli.args[:limit],
     count: cli.args[:count]
   ).run
+
+  cli.outro_message
 end
