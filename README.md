@@ -1,6 +1,6 @@
-# rustby
+# 🦀 rustby 🐝
 
-### Rust Within Ruby
+### 🦀 Rust Within Ruby 💎
 
 #### to run:
 
