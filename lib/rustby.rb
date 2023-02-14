@@ -19,7 +19,7 @@ module Rustby
   # => return results
   Primes::Benchmarker.new(
     alg_str: "sieve_of_atkin",
-    limit: 1_000_000,
+    limit: 10_000_000,
     count: 5
   ).run
 end

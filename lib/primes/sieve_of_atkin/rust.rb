@@ -8,8 +8,7 @@ module SieveOfAtkin
     # find all primes <= max
     # => run it count times
     def self.run(limit)
-      # TODO
-      p RUST.hello
+      p "Rust Found #{RUST.sieve_of_atkin(limit).count} primes <= #{limit}"
     end
   end
 end

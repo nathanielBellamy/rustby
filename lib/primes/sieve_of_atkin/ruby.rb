@@ -32,7 +32,8 @@ module SieveOfAtkin
 
       sieve_res = sieve.map.with_index{ |is_prime, idx| idx if is_prime }.compact
 
-      primes.concat(sieve_res)
+
+      p "Ruby Found #{primes.concat(sieve_res).count} primes <= #{limit}"
     end
 
     def self.alg_3_1_conditions(n, limit)
