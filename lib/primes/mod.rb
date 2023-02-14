@@ -3,6 +3,7 @@
 require "benchmark"
 require_relative "sieve_of_atkin/ruby"
 require_relative "sieve_of_atkin/rust"
+require_relative "../user_io/cli"
 
 module Primes
   class PrimesError < StandardError; end
@@ -20,16 +21,31 @@ module Primes
     # execute and time algorithm to find all primes <= limit
     # => run the algorithm count times in each language and take average
     # => compare results between ruby and rust
+    # TODO: refactor to appease rubocop
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def run
       raise PrimesError, "Please select an algorithm to benchmark." if alg == ""
 
       Benchmark.bm do |x|
-        p "=====RUBY"
-        x.report { alg::Ruby.run(limit) }
-        p "=====RUST"
-        x.report { alg::Rust.run(limit) }
+        UserIO::Cli.ruby_marker
+        ruby_res = []
+        rust_res = []
+        x.report do
+          (1..count).each do
+            ruby_res = alg::Ruby.new(limit).run
+          end
+          UserIO::Cli.lang_res(ruby_res, limit, count)
+        end
+        UserIO::Cli.rust_marker
+        x.report do
+          (1..count).each do
+            rust_res = alg::Rust.new(limit).run
+          end
+          UserIO::Cli.lang_res(ruby_res, limit, count)
+        end
       end
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def alg
       case alg_str

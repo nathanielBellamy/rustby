@@ -4,11 +4,10 @@ module SieveOfAtkin
   # engine base
   # TODO: abstract into base to be shared between algorithm modules
   class Base
-    attr_reader :max, :count
+    attr_reader :limit
 
-    def initialize(max = 2, count = 2)
-      @max = max
-      @count = count
+    def initialize(limit = 2)
+      @limit = limit
     end
   end
 end
