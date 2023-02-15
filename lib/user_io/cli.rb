@@ -6,9 +6,9 @@ module UserIO
     attr_reader :limit, :alg_str, :count
 
     def initialize(argv)
-      @limit = argv[0].to_i || 1_000
-      @alg_str = argv[1] || "sieve_of_atkin"
-      @count = argv[2].nil? ? 1 : argv[2].to_i
+      @limit = argv[1].nil? ? 1_000 : argv[1].to_i
+      @alg_str = argv[2] || "sieve_of_atkin"
+      @count = argv[3].nil? ? 2 : argv[2].to_i
     end
 
     def args
@@ -65,7 +65,7 @@ module UserIO
       ""
     end
 
-    def self.benchmarking
+    def benchmarking
       p " Benchmarking..."
     end
 

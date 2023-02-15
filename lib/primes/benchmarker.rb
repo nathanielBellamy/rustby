@@ -4,6 +4,7 @@ require "benchmark"
 require_relative "sieve_of_atkin/ruby"
 require_relative "sieve_of_atkin/rust"
 require_relative "../user_io/cli"
+require_relative "base"
 
 module Primes
   # measure run time of different algorithms

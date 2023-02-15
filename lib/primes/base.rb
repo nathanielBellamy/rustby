@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Primes
+  class PrimesError < StandardError; end
+
   # algorithm engine base
   class Base
     attr_reader :limit, :count
