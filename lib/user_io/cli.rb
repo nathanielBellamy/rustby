@@ -37,11 +37,11 @@ module UserIO
       divider_with_space
       p " You should see above the results comparing the performance of Pure Ruby and Embedded Rust."
       p " This testing uses the Benchmark.bmbm method, which runs the tests twice:"
-      p "    => first it runs a Rehearsal, which establishes the environment "
-      p "       without this phase, Ruby's memory allocation and garbage collection may hinder the performance"
-      p "       of the first benchmark, which is Ruby in our case."
-      p "    => the second result is the more accurate, although variance is inevitable"
-      p " On my system I see #{UserIO::Cli.rust_marker} outperforming #{UserIO::Cli.ruby_marker} by a substantial margin in both passes."
+      p "    => First it runs a Rehearsal, which establishes the environment. "
+      p "       Without this phase, Ruby's memory allocation and garbage collection may hinder"
+      p "       the performance of the first benchmark, which is Ruby in our case."
+      p "    => The second result is the more accurate, although some variance is inevitable."
+      p " On my system I see Rust outperforming Ruby by a substantial margin on both passes."
       divider_with_space
       p "                     🐝💎🦀 Thanks for stopping by! 🦀💎🐝"
       divider_with_space
