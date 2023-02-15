@@ -69,9 +69,10 @@ module UserIO
       p " Benchmarking..."
     end
 
-    def self.lang_res(lang, res, limit, count)
-      lang_marker = lang == "ruby" ? self.ruby_marker : self.rust_marker
-      p "#{lang_marker} found #{res.count} primes <= #{limit} and did so #{count} times."
+    def self.lang_res(alg_class, res, limit, count)
+      lang_marker = alg_class.lang == "ruby" ? self.ruby_marker : self.rust_marker
+      p "#{lang_marker} found #{res.count} primes <= #{limit}"
+      p "It did so #{count} times using the #{alg_class.display_name} algorithm."
       if limit > 5
         p "[... #{res[-3, 3]&.join(", ")}]"
       end

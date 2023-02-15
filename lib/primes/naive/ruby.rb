@@ -33,5 +33,13 @@ module Naive
 
       primes
     end
+
+    def self.display_name
+      "Naive"
+    end
+
+    def self.lang
+      "ruby"
+    end
   end
 end

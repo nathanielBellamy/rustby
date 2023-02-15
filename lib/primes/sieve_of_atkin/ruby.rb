@@ -7,8 +7,6 @@ module SieveOfAtkin
   # => use pure ruby
   # => translate python algorithm from here: https://stackoverflow.com/questions/21783160/sieve-of-atkin-implementation-in-python
   class Ruby < Primes::Base
-    # TODO: refactor to appease rubocop
-    # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
     def run
       results = []
       (1..count).each do
@@ -17,6 +15,8 @@ module SieveOfAtkin
       results
     end
 
+    # TODO: refactor to appease rubocop
+    # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
     def sieve_of_atkin
       sieve = (0..limit + 1).map { false } # initially mark all numbers as composite
       max_xy = ((limit**0.5) + 1).ceil
@@ -56,5 +56,13 @@ module SieveOfAtkin
       n <= limit && n % 12 == 11
     end
     # rubocop:enable Naming/MethodParameterName
+
+    def self.display_name
+      "Sieve of Atkin"
+    end
+
+    def self.lang
+      "ruby"
+    end
   end
 end

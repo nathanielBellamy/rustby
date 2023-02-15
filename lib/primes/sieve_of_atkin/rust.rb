@@ -12,5 +12,13 @@ module SieveOfAtkin
     def run
       RUST.sieve_of_atkin(limit, count)
     end
+
+    def self.display_name
+      "Sieve of Atkin"
+    end
+
+    def self.lang
+      "rust"
+    end
   end
 end

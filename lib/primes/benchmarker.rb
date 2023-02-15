@@ -6,11 +6,9 @@ require "benchmark"
 require_relative "../user_io/cli"
 require_relative "base"
 
-# require Ruby and Rust implimentations
-require_relative "sieve_of_atkin/ruby.rb"
-require_relative "sieve_of_atkin/rust.rb"
-require_relative "naive/ruby.rb"
-require_relative "naive/rust.rb"
+# require algorithm module implimentations
+require_relative "sieve_of_atkin/mod"
+require_relative "naive/mod"
 
 module Primes
   # measure run time of different algorithms
@@ -48,8 +46,8 @@ module Primes
 
       p ""
       p ""
-      UserIO::Cli.lang_res("ruby", ruby_res, limit, count)
-      UserIO::Cli.lang_res("rust", rust_res, limit, count)
+      UserIO::Cli.lang_res(alg::Ruby, ruby_res, limit, count)
+      UserIO::Cli.lang_res(alg::Rust, rust_res, limit, count)
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 

@@ -12,5 +12,13 @@ module Naive
     def run
       RUST.naive(limit, count)
     end
+
+    def self.display_name
+      "Naive"
+    end
+
+    def self.lang
+      "rust"
+    end
   end
 end

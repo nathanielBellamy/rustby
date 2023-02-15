@@ -17,6 +17,9 @@
 - `rake primes:sieve_of_atkin {limit} {count}`
   - explicitly run Sieve of Atkin algorithm
 
+- `rake primes:naive {limit} {count}`
+  - explicitly run Naive algorithm
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
