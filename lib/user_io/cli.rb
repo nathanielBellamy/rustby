@@ -6,9 +6,9 @@ module UserIO
     attr_reader :limit, :alg_str, :count
 
     def initialize(argv)
-      @limit = argv[1].nil? ? 1_000 : argv[1].to_i
-      @alg_str = argv[2] || "sieve_of_atkin"
-      @count = argv[3].nil? ? 2 : argv[2].to_i
+      @limit = argv[0].nil? ? 1_000 : argv[0].to_i
+      @alg_str = argv[1] || "sieve_of_atkin"
+      @count = argv[2].nil? ? 2 : argv[2].to_i
     end
 
     def args
@@ -73,7 +73,7 @@ module UserIO
       lang_marker = lang == "ruby" ? self.ruby_marker : self.rust_marker
       p "#{lang_marker} found #{res.count} primes <= #{limit} and did so #{count} times."
       if limit > 5
-        p "[... #{res[-3, 3].join(", ")}]"
+        p "[... #{res[-3, 3]&.join(", ")}]"
       end
     end
 

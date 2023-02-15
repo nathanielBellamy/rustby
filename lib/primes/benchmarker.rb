@@ -1,14 +1,21 @@
 # frozen_string_literal: true
 
 require "benchmark"
-require_relative "sieve_of_atkin/ruby"
-require_relative "sieve_of_atkin/rust"
+
+
 require_relative "../user_io/cli"
 require_relative "base"
+
+# require Ruby and Rust implimentations
+require_relative "sieve_of_atkin/ruby.rb"
+require_relative "sieve_of_atkin/rust.rb"
+require_relative "naive/ruby.rb"
+require_relative "naive/rust.rb"
 
 module Primes
   # measure run time of different algorithms
   class Benchmarker
+    include Naive
     include SieveOfAtkin
     attr_reader :alg_str, :limit, :count
 
@@ -48,8 +55,10 @@ module Primes
 
     def alg
       case alg_str
-      when "sieve_of_atkin", "soa"
+      when "sieve_of_atkin", "soa", "s"
         @alg ||= SieveOfAtkin
+      when "naive", "n"
+        @alg ||= Naive
       else
         raise PrimesError,
               <<~HEREDOC
