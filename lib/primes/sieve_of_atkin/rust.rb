@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
-require_relative "base"
+require_relative "../base"
 
+# impliment Sieve of Atkin algorithm to compute primes
 module SieveOfAtkin
   # rust engine
-  class Rust < Base
+  # rust code here: rust/primes/sieve_of_atkin.rs
+  class Rust < Primes::Base
     # find all primes <= max
     # => run it count times
     def run
-      RUST.sieve_of_atkin(limit)
+      RUST.sieve_of_atkin(limit, count)
     end
   end
 end

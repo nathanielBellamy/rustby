@@ -72,14 +72,17 @@ module UserIO
     def self.lang_res(lang, res, limit, count)
       lang_marker = lang == "ruby" ? self.ruby_marker : self.rust_marker
       p "#{lang_marker} found #{res.count} primes <= #{limit} and did so #{count} times."
+      if limit > 5
+        p "[... #{res[-3, 3].join(", ")}]"
+      end
     end
 
     def self.ruby_marker
-      "💎💎💎RUBY"
+      "💎RUBY"
     end
 
     def self.rust_marker
-      "🦀🦀🦀RUST"
+      "🦀RUST"
     end
   end
 end

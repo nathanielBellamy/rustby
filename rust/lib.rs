@@ -12,8 +12,8 @@ class!(RUST);
 methods!(
     RUST,
     _rtself,
-    fn sieve_of_atkin(lim: Integer) -> Array {
-        SieveOfAtkin::run(lim.unwrap())
+    fn sieve_of_atkin(lim: Integer, ct: Integer) -> Array {
+        SieveOfAtkin::new(lim.unwrap(), ct.unwrap()).run()
     }
 );
 

@@ -30,22 +30,18 @@ module Primes
 
       Benchmark.bmbm do |x|
         x.report(UserIO::Cli.ruby_marker) do
-          (1..count).each do
-            ruby_res = alg::Ruby.new(limit).run
-          end
+          ruby_res = alg::Ruby.new(limit, count).run
         end
 
         x.report(UserIO::Cli.rust_marker) do
-          (1..count).each do
-            rust_res = alg::Rust.new(limit).run
-          end
+          rust_res = alg::Rust.new(limit, count).run
         end
       end
 
       p ""
       p ""
       UserIO::Cli.lang_res("ruby", ruby_res, limit, count)
-      UserIO::Cli.lang_res("rust", ruby_res, limit, count)
+      UserIO::Cli.lang_res("rust", rust_res, limit, count)
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 

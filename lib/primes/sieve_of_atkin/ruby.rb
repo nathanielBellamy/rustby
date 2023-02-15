@@ -1,16 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "base"
+require_relative "../base"
 
+# impliment Sieve of Atkin algorithm to compute primes
 module SieveOfAtkin
-  # find all primes <= limit
-  # => run it k times
   # => use pure ruby
   # => translate python algorithm from here: https://stackoverflow.com/questions/21783160/sieve-of-atkin-implementation-in-python
-  class Ruby < Base
+  class Ruby < Primes::Base
     # TODO: refactor to appease rubocop
     # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
     def run
+      results = []
+      (1..count).each do
+        results = sieve_of_atkin
+      end
+      results
+    end
+
+    def sieve_of_atkin
       sieve = (0..limit + 1).map { false } # initially mark all numbers as composite
       max_xy = ((limit**0.5) + 1).ceil
       (1..max_xy).each do |x|
@@ -32,7 +39,7 @@ module SieveOfAtkin
         end
       end
 
-      sieve.map.with_index { |is_prime, idx| idx if is_prime }.compact
+      [2, 3].concat(sieve.map.with_index { |is_prime, idx| idx if is_prime }.compact)
     end
     # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
