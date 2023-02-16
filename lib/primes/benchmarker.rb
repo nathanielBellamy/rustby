@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require "benchmark"
-
-
 require_relative "../user_io/cli"
 require_relative "base"
 
@@ -29,7 +27,6 @@ module Primes
     # TODO: refactor to appease rubocop
     # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def run
-      raise PrimesError, "Please select an algorithm to benchmark." if alg == ""
 
       ruby_res = []
       rust_res = []
@@ -58,11 +55,8 @@ module Primes
       when "naive", "n"
         @alg ||= Naive
       else
-        raise PrimesError,
-              <<~HEREDOC
-                We have not yet implemented the algorithm you have entered.
-                Please try another.
-              HEREDOC
+        raise Primes::Error,
+              UserIO::Cli.alg_not_found
       end
     end
   end

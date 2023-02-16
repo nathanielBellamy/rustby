@@ -15,7 +15,7 @@ impl Naive {
 
     pub fn run(&self) -> Array {
         let mut results = Array::new();
-        for _ in 1..self.count {
+        for _ in 1..self.count + 1 {
             results = self.naive();
         }
         results

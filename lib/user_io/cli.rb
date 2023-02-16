@@ -6,7 +6,8 @@ module UserIO
     attr_reader :limit, :alg_str, :count
 
     def initialize(argv)
-      @limit = argv[0].nil? ? 1_000 : argv[0].to_i
+      pp argv
+      @limit = argv[0].to_i == 0 ? 1_000 : argv[0].to_i
       @alg_str = argv[1] || "sieve_of_atkin"
       @count = argv[2].nil? ? 2 : argv[2].to_i
     end
@@ -67,6 +68,19 @@ module UserIO
 
     def benchmarking
       p " Benchmarking..."
+    end
+
+    def self.alg_not_found
+      <<~HEREDOC
+        We have not yet implemented the algorithm you have entered.
+        So far we have:
+          - Sieve of Atkin
+            - rake primes:main {limit} sieve_of_atkin {count}
+            - rake primes:main {limit} s {count}
+          - Sieve of Naive
+            - rake primes:main {limit} naive {count}
+            - rake primes:main {limit} n {count}
+      HEREDOC
     end
 
     def self.lang_res(alg_class, res, limit, count)

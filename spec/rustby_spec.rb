@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rutie"
+
 RSpec.describe Rustby do
   it "has a version number" do
     expect(Rustby::VERSION).not_to be nil
@@ -24,6 +26,8 @@ RSpec.describe Rustby do
             expect(message).to eq("You have been helped by an imposter.")
           when 3
             message = UsefulHelper.provide_aid
+          else
+            message = "4! = 24"
           end
           count += 1
         end

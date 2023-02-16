@@ -15,8 +15,8 @@ impl SieveOfAtkin {
 
     pub fn run(&self) -> Array {
         let mut results = Array::new();
-        for _ in 1..self.count {
-            results = self.sieve_of_atkin()
+        for _ in 1..self.count + 1 {
+            results = self.sieve_of_atkin();
         }
         results
     }

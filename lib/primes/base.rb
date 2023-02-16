@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Primes
-  class PrimesError < StandardError; end
+  class Error < StandardError; end
 
   # algorithm engine base
   class Base

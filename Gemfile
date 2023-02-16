@@ -6,6 +6,15 @@ source "https://rubygems.org"
 gemspec
 
 gem "rake", "~> 13.0"
-gem "rspec", "~> 3.0"
 gem "rubocop", "~> 0.80"
-gem "rutie", "~> 0.0.3"
+
+group :rust do
+  gem "rutie", "~> 0.0.3"
+end
+
+group :test do
+  gem "rspec", "~> 3.0"
+end
+
+
+
