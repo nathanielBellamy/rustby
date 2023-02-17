@@ -2,7 +2,9 @@
 
 ### 🦀 Rust Within Ruby 💎
 
-#### to run:
+#### Build in Ruby  ->  Optimize in Rust  -> Fall Back on Ruby (if it doesn't work out)
+
+#### to run: (WILL NOT RUN ON THIS COMMIT OR THE PREVIOUS)
 
 - `rake primes:main {limit} {algorithm} {count}`
   - e.g. `rake primes:main 12345 sieve_of_atkin 1000`
