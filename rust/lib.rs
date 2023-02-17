@@ -4,11 +4,10 @@ extern crate rutie;
 use crate::error::rust_error::RustError;
 use rutie::{Array, Integer};
 use rutie::{Class, Object};
-use std::error::Error;
+
 use std::panic;
 
 mod error;
-
 mod primes;
 use crate::primes::naive::Naive;
 use crate::primes::sieve_of_atkin::SieveOfAtkin;
@@ -16,8 +15,18 @@ use crate::primes::sieve_of_atkin::SieveOfAtkin;
 mod ruby_io;
 use crate::ruby_io::ruby_array::RubyArray;
 
+mod test;
+use crate::test::panic_on_purpose::PanicOnPurpose;
+
+// the class to which Rub will have access
 class!(RUST);
 
+// define RUST class which Ruby can access
+//  => functions here wrap main rust code
+//  => functions here call their underlying rust function wrapped in panic::catch_unwind
+//  => if the underlying function panics, the function here catches+handles a Result::Err
+//  => if any error occurs, functions here return RustError::new(my_message)
+//  => rustby checks for RustErrors using Rustby.is_rust_error(my_result)
 methods!(
     RUST,
     _rtself,
@@ -42,8 +51,7 @@ methods!(
         }) {
             Ok(primes) => results = primes, // store results outside of Unwind
             Err(_) => {
-                let err: Box<dyn Error> = String::from("Naive: Rust Panic").into();
-                return RustError::new(err);
+                return RustError::new("Naive: Rust Panic");
             }
         }
 
@@ -67,28 +75,36 @@ methods!(
                 Err(_) => vec![],
             }
         }) {
-            Ok(primes) => results = primes, // capture primes if success
+            Ok(primes) => results = primes, // store results outside of Unwind
             Err(_) => {
-                // return RustError if not
-                let err: Box<dyn Error> = String::from("Naive: Rust Panicked").into();
-                return RustError::new(err);
+                return RustError::new("Naive: Rust Panicked");
             }
         }
 
         RubyArray::from_vec_i64(results)
     },
+    // test functions
     fn rust_error() -> Array {
-        let err: Box<dyn Error> = String::from("You made Rust panic!").into();
-        RustError::new(err)
+        RustError::new("YOU MADE RUST RETURN AN ERROR")
+    },
+    fn make_rust_panic() -> Array {
+        if panic::catch_unwind(PanicOnPurpose::now).is_err() {
+            RustError::new("YOU MADE RUST PANIC")
+        } else {
+            // this code should never be reached
+            RustError::new("YOU DID NOT MAKE RUST PANIC")
+        }
     }
 );
 
 #[allow(non_snake_case)]
 #[no_mangle]
+// expose RUST class and its methods to Ruby
 pub extern "C" fn Init_rustby() {
     Class::new("RUST", None).define(|klass| {
         klass.def_self("naive", naive);
         klass.def_self("sieve_of_atkin", sieve_of_atkin);
         klass.def_self("rust_error", rust_error);
+        klass.def_self("make_rust_panic", make_rust_panic);
     });
 }

@@ -26,10 +26,25 @@ RSpec.describe Services::Fallbacker do
       end
     end
 
-    context "when rust errors" do
+    context "when rust returns an error" do
       before do
         allow(RUST).to receive(:sieve_of_atkin).with(limit, count) do
-          ["RUST_ERROR", "Error: OH NO!"]
+          RUST.rust_error
+        end
+      end
+
+      it "calls ruby and completes the computation" do
+        expect(mod::Ruby).to receive(:new).exactly(1).time.and_call_original # ruby alg called
+
+        res = fallbacker.run
+        expect(res).to match_array PRIMES_TO_10K # results still computed
+      end
+    end
+
+    context "when rust panics" do
+      before do
+        allow(RUST).to receive(:sieve_of_atkin).with(limit, count) do
+          RUST.make_rust_panic
         end
       end
 
