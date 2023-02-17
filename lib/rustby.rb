@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "rustby/version"
+require_relative "services/mod"
 require_relative "primes/mod"
 require_relative "user_io/cli"
 require "rutie"

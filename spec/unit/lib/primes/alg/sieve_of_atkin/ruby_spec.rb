@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Primes::Alg::SieveOfAtkin::Ruby do
-  let(:limit) { 10_000 }
-  let(:count) { 5 }
+  let(:args) { {limit: 10_000, count: 5} }
 
-  subject(:soa_ruby) { described_class.new(limit, count) }
+  subject(:soa_ruby) { described_class.new(**args) }
 
   describe "run" do
     it "runs algorithm {count} times" do # ruby handles looping

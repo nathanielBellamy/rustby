@@ -85,7 +85,7 @@ module UserIO
     def self.lang_res(mod, res, limit, count)
       lang_marker = mod.lang == "ruby" ? self.ruby_marker : self.rust_marker
       p "#{lang_marker} found #{res.count} primes <= #{limit}"
-      p "It did so #{count} times using the #{alg_class.display_name} algorithm."
+      p "It did so #{count} times using the #{mod.display_name} algorithm."
       if limit > 5
         p "[... #{res[-3, 3]&.join(", ")}]"
       end

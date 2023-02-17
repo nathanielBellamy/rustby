@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Primes::Alg::SieveOfAtkin::Rust do
-  let(:limit) { 10_000 }
   let(:count) { 5 }
+  let(:args) { {limit: 10_000, count: count} }
 
-  let(:soa_rust) { described_class.new(limit, count) }
+  let(:soa_rust) { described_class.new(**args) }
 
   describe "run" do
     it "calls rust RUST class exactly once" do # rust handles looping, ruby calls once

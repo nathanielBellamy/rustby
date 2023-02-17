@@ -1,14 +1,15 @@
-RSpec.describe Primes::Services::Fallbacker do
-  let(:alg_str) { "sieve_of_atkin" }
-  let(:limit) { 10000 }
-  let(:count) { 5 }
-  let(:alg) { fallbacker.alg }
+RSpec.describe Services::Fallbacker do
+  let(:mod) { Primes::Alg::SieveOfAtkin }
+  let(:func) { "public_run" }
+  let(:limit) { 10_000 }
+  let(:count) { 2 }
+  let(:args) { {limit: limit, count: count} }
 
   subject(:fallbacker) do
     described_class.new(
-      alg_str: alg_str,
-      limit: limit,
-      count: count
+      mod: mod,
+      func: func,
+      args: args
     )
   end
 
@@ -19,8 +20,8 @@ RSpec.describe Primes::Services::Fallbacker do
     end
 
     context "when rust does not panic" do
-      it "does not call ruby" do
-        expect(alg::Ruby).to receive(:new).exactly(0).time.and_call_original
+      it "does not call the ruby class" do
+        expect(mod::Ruby).to receive(:new).exactly(0).time.and_call_original
         fallbacker.run
       end
     end
@@ -33,7 +34,7 @@ RSpec.describe Primes::Services::Fallbacker do
       end
 
       it "calls ruby and completes the computation" do
-        expect(alg::Ruby).to receive(:new).exactly(1).time.and_call_original # ruby alg called
+        expect(mod::Ruby).to receive(:new).exactly(1).time.and_call_original # ruby alg called
 
         res = fallbacker.run
         expect(res).to match_array PRIMES_TO_10K # results still computed

@@ -3,10 +3,13 @@
 module Services
   # load ruby and rust modules
   class Base
-    attr_reader :rust_mod, :ruby_mod
-    def initialize(ruby_mod, rust_mod)
-      @ruby_mod = ruby_mod
-      @rust_mod = rust_mod
+    attr_reader :rust_class, :ruby_class, :func, :args
+
+    def initialize(mod:, func:, args: {})
+      @ruby_class = mod::Ruby
+      @rust_class = mod::Rust
+      @func = func
+      @args = args
     end
   end
 end
