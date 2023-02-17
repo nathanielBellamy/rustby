@@ -1,5 +1,5 @@
 use crate::primes::PrimesResult;
-use rutie::{Array, Integer};
+use rutie::Integer;
 use std::error;
 use std::fmt;
 
@@ -26,7 +26,7 @@ impl SieveOfAtkin {
     }
 
     pub fn run(&self) -> PrimesResult {
-        let mut results = Array::new();
+        let mut results: Vec<i64> = vec![];
         for _ in 1..self.count + 1 {
             results = self.sieve_of_atkin()?;
         }
@@ -66,17 +66,13 @@ impl SieveOfAtkin {
             }
         }
 
-        let mut sieve_results = Array::new();
+        let mut primes: Vec<i64> = vec![2, 3];
         for (n, is_prime) in sieve.iter().enumerate() {
             if *is_prime {
-                sieve_results.push(Integer::new(n as i64));
+                primes.push(n as i64);
             }
         }
 
-        let mut primes = Array::new();
-        primes.push(Integer::new(2_i64));
-        primes.push(Integer::new(3_i64));
-
-        Ok(primes.concat(&sieve_results))
+        Ok(primes)
     }
 }

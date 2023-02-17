@@ -10,7 +10,7 @@ module Services
   # run algorithm in rust
   # fallback to ruby algorithm if rust errors
   # TODO: handle a pure rust panic!()
-  class Fallbacker < Primes::Services::Base
+  class Fallbacker < Services::Base
     def run(func: "", args: {})
       begin
         # run in rust

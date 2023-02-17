@@ -1,5 +1,5 @@
 use crate::primes::PrimesResult;
-use rutie::{Array, Integer};
+use rutie::Integer;
 use std::error;
 use std::fmt;
 
@@ -26,7 +26,7 @@ impl Naive {
     }
 
     pub fn run(&self) -> PrimesResult {
-        let mut results = Array::new();
+        let mut results: Vec<i64> = vec![];
         for _ in 1..self.count + 1 {
             results = self.naive()?;
         }
@@ -34,27 +34,22 @@ impl Naive {
     }
 
     pub fn naive(&self) -> PrimesResult {
-        let mut primes: Vec<u64> = vec![2];
+        let mut primes: Vec<i64> = vec![2];
 
         for n in 3..self.limit {
             let mut is_prime = true; // assume prime
             for prime in &primes {
-                if n % prime == 0 {
+                if n as i64 % *prime == 0 {
                     // until prove composite
                     is_prime = false;
                     break;
                 }
             }
             if is_prime {
-                primes.push(n);
+                primes.push(n as i64);
             }
         }
 
-        // prep output to be returned to ruby
-        let mut ruby_primes = Array::new();
-        for prime in primes {
-            ruby_primes.push(Integer::new(prime as i64));
-        }
-        Ok(ruby_primes)
+        Ok(primes)
     }
 }
