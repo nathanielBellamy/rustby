@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe SieveOfAtkin do
+RSpec.describe Primes::Alg::SieveOfAtkin do
   let(:limit) { 1_000_000 }
   let(:count) { 1 }
 
-  let(:soa_ruby) { SieveOfAtkin::Ruby.new(limit, count) }
-  let(:soa_rust) { SieveOfAtkin::Rust.new(limit, count) }
+  let(:soa_ruby) { Primes::Alg::SieveOfAtkin::Ruby.new(limit, count) }
+  let(:soa_rust) { Primes::Alg::SieveOfAtkin::Rust.new(limit, count) }
 
   describe "sieve_of_atkin" do
     it "finds the same primes whether using ruby or rust" do

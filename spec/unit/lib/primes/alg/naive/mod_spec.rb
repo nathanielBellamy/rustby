@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Naive do
+RSpec.describe Primes::Alg::Naive do
   let(:limit) { 15_000 } # a little further to prove correct dynamic computation
                          # but don't want to slow down specs
   let(:count) { 1 }
-  let(:soa_ruby) { Naive::Ruby.new(limit, count) }
-  let(:soa_rust) { Naive::Rust.new(limit, count) }
+  let(:soa_ruby) { Primes::Alg::Naive::Ruby.new(limit, count) }
+  let(:soa_rust) { Primes::Alg::Naive::Rust.new(limit, count) }
 
   describe "naive" do
     it "finds the same primes whether using ruby or rust" do

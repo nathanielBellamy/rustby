@@ -1,9 +1,21 @@
+use crate::primes::PrimesResult;
 use rutie::{Array, Integer};
+use std::error;
+use std::fmt;
 
+#[derive(Debug, Clone)]
 pub struct SieveOfAtkin {
     pub limit: u64,
     pub count: u64,
 }
+
+impl fmt::Display for SieveOfAtkin {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "AN ERROR OCCURRED IN RUST_PRIMES_SIEVE_OF_ATKIN")
+    }
+}
+
+impl error::Error for SieveOfAtkin {}
 
 impl SieveOfAtkin {
     pub fn new(lim: Integer, ct: Integer) -> SieveOfAtkin {
@@ -13,15 +25,15 @@ impl SieveOfAtkin {
         }
     }
 
-    pub fn run(&self) -> Array {
+    pub fn run(&self) -> PrimesResult {
         let mut results = Array::new();
         for _ in 1..self.count + 1 {
-            results = self.sieve_of_atkin();
+            results = self.sieve_of_atkin()?;
         }
-        results
+        Ok(results)
     }
 
-    pub fn sieve_of_atkin(&self) -> Array {
+    pub fn sieve_of_atkin(&self) -> PrimesResult {
         let mut sieve: Vec<bool> = vec![false; (self.limit + 1) as usize]; // assumed composite until proven prime
         let max_xy: u64 = ((self.limit as f64).sqrt() + 1.0).ceil() as u64;
         for x in 1..max_xy {
@@ -65,6 +77,6 @@ impl SieveOfAtkin {
         primes.push(Integer::new(2_i64));
         primes.push(Integer::new(3_i64));
 
-        primes.concat(&sieve_results)
+        Ok(primes.concat(&sieve_results))
     }
 }

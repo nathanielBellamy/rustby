@@ -6,7 +6,6 @@ module UserIO
     attr_reader :limit, :alg_str, :count
 
     def initialize(argv)
-      pp argv
       @limit = argv[0].to_i == 0 ? 1_000 : argv[0].to_i
       @alg_str = argv[1] || "sieve_of_atkin"
       @count = argv[2].nil? ? 2 : argv[2].to_i
@@ -83,8 +82,8 @@ module UserIO
       HEREDOC
     end
 
-    def self.lang_res(alg_class, res, limit, count)
-      lang_marker = alg_class.lang == "ruby" ? self.ruby_marker : self.rust_marker
+    def self.lang_res(mod, res, limit, count)
+      lang_marker = mod.lang == "ruby" ? self.ruby_marker : self.rust_marker
       p "#{lang_marker} found #{res.count} primes <= #{limit}"
       p "It did so #{count} times using the #{alg_class.display_name} algorithm."
       if limit > 5

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "rutie"
-
 RSpec.describe Rustby do
   it "has a version number" do
     expect(Rustby::VERSION).not_to be nil

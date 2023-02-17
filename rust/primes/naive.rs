@@ -1,9 +1,21 @@
+use crate::primes::PrimesResult;
 use rutie::{Array, Integer};
+use std::error;
+use std::fmt;
 
+#[derive(Debug, Clone)]
 pub struct Naive {
     pub limit: u64,
     pub count: u64,
 }
+
+impl fmt::Display for Naive {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "AN ERROR OCCURRED IN RUST_PRIMES_NAIVE")
+    }
+}
+
+impl error::Error for Naive {}
 
 impl Naive {
     pub fn new(lim: Integer, ct: Integer) -> Naive {
@@ -13,15 +25,15 @@ impl Naive {
         }
     }
 
-    pub fn run(&self) -> Array {
+    pub fn run(&self) -> PrimesResult {
         let mut results = Array::new();
         for _ in 1..self.count + 1 {
-            results = self.naive();
+            results = self.naive()?;
         }
-        results
+        Ok(results)
     }
 
-    pub fn naive(&self) -> Array {
+    pub fn naive(&self) -> PrimesResult {
         let mut primes: Vec<u64> = vec![2];
 
         for n in 3..self.limit {
@@ -43,6 +55,6 @@ impl Naive {
         for prime in primes {
             ruby_primes.push(Integer::new(prime as i64));
         }
-        ruby_primes
+        Ok(ruby_primes)
     }
 }

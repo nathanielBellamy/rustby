@@ -1,4 +1,4 @@
-RSpec.describe Primes::Benchmarker do
+RSpec.describe Primes::Services::Benchmarker do
   let(:alg_str) { "sieve_of_atkin" }
   let(:limit) { 10000 }
   let(:count) { 5 }
@@ -14,7 +14,7 @@ RSpec.describe Primes::Benchmarker do
   describe "alg" do
     context "whe alg_str is sieve_of_atkin" do
       it 'returns SieveOfAtkin module' do
-        expect(benchmarker.alg).to eq(SieveOfAtkin)
+        expect(benchmarker.alg).to eq(Primes::Alg::SieveOfAtkin)
       end
     end
 
@@ -22,7 +22,7 @@ RSpec.describe Primes::Benchmarker do
       let(:alg_str) { "soa" }
 
       it 'returns SieveOfAtkin module' do
-        expect(benchmarker.alg).to eq(SieveOfAtkin)
+        expect(benchmarker.alg).to eq(Primes::Alg::SieveOfAtkin)
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe Primes::Benchmarker do
       let(:alg_str) { "s" }
 
       it 'returns SieveOfAtkin module' do
-        expect(benchmarker.alg).to eq(SieveOfAtkin)
+        expect(benchmarker.alg).to eq(Primes::Alg::SieveOfAtkin)
       end
     end
 
@@ -38,7 +38,7 @@ RSpec.describe Primes::Benchmarker do
       let(:alg_str) { "naive" }
 
       it 'returns Naive module' do
-        expect(benchmarker.alg).to eq(Naive)
+        expect(benchmarker.alg).to eq(Primes::Alg::Naive)
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe Primes::Benchmarker do
       let(:alg_str) { "n" }
 
       it 'returns Naive module' do
-        expect(benchmarker.alg).to eq(Naive)
+        expect(benchmarker.alg).to eq(Primes::Alg::Naive)
       end
     end
 
@@ -67,7 +67,9 @@ RSpec.describe Primes::Benchmarker do
 
     describe "run" do
       it "calls Benchmark.bmbm one time to run comparison" do
-        expect(Benchmark).to receive(:bmbm).exactly(1).time.and_call_original
+        expect(Benchmark).to receive(:bmbm)
+          .exactly(1).time
+          .and_call_original
         benchmarker.run
       end
 
