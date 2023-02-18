@@ -1,4 +1,4 @@
-RSpec.describe UserIO::Cli do
+RSpec.describe Primes::Cli do
   let(:limit) { 10_000 }
   let(:alg_str) { "sieve_of_atkin" }
   let(:count) { 2 }
@@ -9,7 +9,7 @@ RSpec.describe UserIO::Cli do
   end
 
   describe "initialize" do
-    context "when parsing the first argument into an integer" do
+    context "when parsing limit into an integer" do
       context "when arg impliments .to_i" do
         let(:limit) { "1234" }
 
@@ -27,7 +27,7 @@ RSpec.describe UserIO::Cli do
       end
     end
 
-    context "when parsing the second argument" do
+    context "when parsing the count" do
       context "when arg is anything" do
         let(:alg_str) { "literally any string" }
 
@@ -46,7 +46,7 @@ RSpec.describe UserIO::Cli do
       end
     end
 
-    context "when parsing the third argument" do
+    context "when parsing count" do
       context "when arg impliments .to_i" do
         let(:count) { "9876" }
 
@@ -56,7 +56,7 @@ RSpec.describe UserIO::Cli do
         end
       end
 
-      context "when no argument does not impliment .to_i" do
+      context "when argument does not impliment .to_i" do
         let(:count) { "oh no!" }
 
         it "defaults to 2" do
