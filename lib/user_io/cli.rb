@@ -8,7 +8,7 @@ module UserIO
     def initialize(argv)
       @limit = argv[0].to_i == 0 ? 1_000 : argv[0].to_i
       @alg_str = argv[1] || "sieve_of_atkin"
-      @count = argv[2].nil? ? 2 : argv[2].to_i
+      @count = argv[2].to_i == 0 ? 2 : argv[2].to_i
     end
 
     def args

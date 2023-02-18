@@ -1,4 +1,4 @@
-RSpec.describe Primes::Base do
+RSpec.describe Primes::Alg::Base do
   let(:alg_str) { "sieve_of_atkin" }
   let(:limit) { 10000 }
   let(:count) { 5 }
