@@ -21,7 +21,7 @@ module Primes
           @alg ||= Primes::Alg::Naive
         else
           raise Primes::Error,
-                UserIO::Cli.alg_not_found
+                Primes::Cli.alg_not_found
         end
       end
 

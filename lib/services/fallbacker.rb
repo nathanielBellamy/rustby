@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative "../user_io/cli"
 require_relative "base"
 
 module Services

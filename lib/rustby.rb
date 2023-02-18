@@ -3,7 +3,6 @@
 require_relative "rustby/version"
 require_relative "services/mod"
 require_relative "primes/mod"
-require_relative "user_io/cli"
 require "rutie"
 
 # An Implimentation of Rust Within Ruby

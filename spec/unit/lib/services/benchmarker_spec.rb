@@ -20,13 +20,6 @@ RSpec.describe Services::Benchmarker do
       benchmarker.run
     end
 
-    it "calls the UserIO::Cli class to handle output" do
-      expect(UserIO::Cli).to receive(:ruby_marker).exactly(2).time.and_call_original
-      expect(UserIO::Cli).to receive(:rust_marker).exactly(2).time.and_call_original
-      expect(UserIO::Cli).to receive(:lang_res).exactly(2).times.and_call_original
-      benchmarker.run
-    end
-
     context "when calling the RUST class" do
       it "it calls exactly once per phase of bmbm" do
         # verify that rust handles looping

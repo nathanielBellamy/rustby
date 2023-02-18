@@ -51,10 +51,10 @@ RSpec.describe Primes::Alg::Base do
       let(:alg_str) { "unkown_string" }
 
       before do
-        allow(UserIO::Cli).to receive(:alg_not_found).and_return("TEST PRIMES::ERROR")
+        allow(Primes::Cli).to receive(:alg_not_found).and_return("TEST PRIMES::ERROR")
       end
 
-      it 'raises a PrimesError and calls UserIO::Cli.alg_not_found' do
+      it 'raises a PrimesError and calls Primes::Cli.alg_not_found' do
         expect { base.alg }.to raise_error(
           Primes::Error,
           "TEST PRIMES::ERROR"

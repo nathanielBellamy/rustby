@@ -3,10 +3,10 @@ module Primes
   class Cli
     attr_reader :limit, :alg_str, :count
 
-    def initialize(argv)
-      @limit = argv[0].to_i == 0 ? 1_000 : argv[0].to_i
-      @alg_str = argv[1] || "sieve_of_atkin"
-      @count = argv[2].to_i == 0 ? 2 : argv[2].to_i
+    def initialize(args)
+      @limit = args[:limit].to_i == 0 ? 1_000 : args[:limit].to_i
+      @alg_str = args[:alg_str] || "sieve_of_atkin"
+      @count = args[:count].to_i == 0 ? 2 : args[:count].to_i
     end
 
     def args
@@ -82,6 +82,8 @@ module Primes
 
     def self.lang_res(mod, res, limit, count)
       lang_marker = mod.lang == "ruby" ? self.ruby_marker : self.rust_marker
+      p ""
+      p ""
       p "#{lang_marker} found #{res.count} primes <= #{limit}"
       p "It did so #{count} times using the #{mod.display_name} algorithm."
       if limit > 5

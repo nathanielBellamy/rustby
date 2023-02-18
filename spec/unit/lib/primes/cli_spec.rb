@@ -2,10 +2,10 @@ RSpec.describe Primes::Cli do
   let(:limit) { 10_000 }
   let(:alg_str) { "sieve_of_atkin" }
   let(:count) { 2 }
-  let(:argv) { [limit, alg_str, count] }
+  let(:args) { {limit: limit, alg_str: alg_str, count: count} }
 
   subject(:cli) do
-    described_class.new(argv)
+    described_class.new(args)
   end
 
   describe "initialize" do

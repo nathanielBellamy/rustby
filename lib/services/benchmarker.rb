@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "benchmark"
-require_relative "../user_io/cli"
 require_relative "base"
 
 module Services
@@ -15,28 +14,18 @@ module Services
       rust_res = nil
 
       Benchmark.bmbm do |x|
-        x.report(UserIO::Cli.ruby_marker) do
+        x.report(cli.ruby_marker) do
           ruby_res = ruby_class.send(func, **args)
         end
 
-        x.report(UserIO::Cli.rust_marker) do
+        x.report(cli.rust_marker) do
           rust_res = rust_class.send(func, **args)
         end
       end
 
-      p ""
-      p ""
-      UserIO::Cli.lang_res(ruby_class, ruby_res, limit, count)
-      UserIO::Cli.lang_res(rust_class, rust_res, limit, count)
+      cli.lang_res(lang_class: ruby_class, result: ruby_res)
+      cli.lang_res(lang_class: rust_class, result: rust_res)
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
-
-    def limit
-      @limit ||= args[:limit] || "NO LIMIT GIVEN"
-    end
-
-    def count
-      @count ||= args[:count] || "NO COUNT GIVEN"
-    end
   end
 end
