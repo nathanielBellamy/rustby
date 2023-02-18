@@ -9,5 +9,11 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
+
+# primes module
+import "rakelib/primes/benchmark.rake"
+import "rakelib/primes/rust.rake"
+import "rakelib/primes/ruby.rake"
+
 task default: %i[spec rubocop]
 

@@ -2,7 +2,7 @@ RSpec.describe Services::Benchmarker do
   let(:mod) { Primes::Alg::SieveOfAtkin }
   let(:limit) { 10_000 }
   let(:count) { 2 }
-  let(:args) { {alg_str: "sieve_of_atkin", limit: limit, count: count} }
+  let(:args) { {limit: limit, count: count} }
 
   subject(:benchmarker) do
     described_class.new(

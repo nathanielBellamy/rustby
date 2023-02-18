@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Primes::Cli do
   let(:limit) { 10_000 }
   let(:alg_str) { "sieve_of_atkin" }

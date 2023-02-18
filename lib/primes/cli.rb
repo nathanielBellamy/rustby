@@ -1,7 +1,7 @@
 module Primes
     # provide cli functionality
   class Cli
-    attr_reader :limit, :alg_str, :count
+    attr_reader :limit, :alg_str, :count, :mod
 
     def initialize(args)
       @limit = args[:limit].to_i == 0 ? 1_000 : args[:limit].to_i
@@ -23,9 +23,9 @@ module Primes
       p "              === Build in #{ruby_marker}. Optimize in #{rust_marker}. ==="
       p "                === thx. to github/danielpclark/rutie === "
       divider_with_space
-      p " We will be finding primes up to #{@limit}."
-      p " We will run each computation #{@count} time(s) in both Ruby and Rust."
-      p " We will then gather the data provided by Ruby's Benchmark class and compare results."
+      p " We will be finding primes up to #{limit}."
+      p " We will run each computation #{count} time(s) in both Ruby and Rust."
+      p " We will compare results provided by Ruby's Benchmark class."
       divider_with_space
     end
 
@@ -85,10 +85,25 @@ module Primes
       p ""
       p ""
       p "#{lang_marker} found #{result.count} primes <= #{limit}"
-      p "It did so #{count} times using the algorithm built in #{lang_marker} ."
-      if limit > 5
-        p "[... #{result[-3, 3]&.join(", ")}]"
+      if limit < 25
+        p result
+      else
+        p "[... #{result[-5, 5]&.join(", ")}]"
       end
+      p "It did so #{count} times using the #{alg_str} algorithm built in #{lang_marker} ."
+      p ""
+      p ""
+    end
+
+    def full_res(lang:, result:)
+      lang_marker = lang == "ruby" ? ruby_marker : rust_marker
+
+      p ""
+      p "**********************"
+      p "#{lang_marker}"
+      p "**********************"
+
+      p result
     end
 
     def ruby_marker

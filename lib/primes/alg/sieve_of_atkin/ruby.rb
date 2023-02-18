@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../base"
+require_relative "base"
 
 module Primes
   module Alg
@@ -8,7 +8,7 @@ module Primes
     module SieveOfAtkin
       # => use pure ruby
       # => translate python algorithm from here: https://stackoverflow.com/questions/21783160/sieve-of-atkin-implementation-in-python
-      class Ruby < Primes::Alg::Base
+      class Ruby < Base
         def run
           results = []
           (1..count).each do
@@ -61,6 +61,10 @@ module Primes
 
         def self.display_name
           "Sieve of Atkin"
+        end
+
+        def lang
+          "ruby"
         end
 
         def self.lang

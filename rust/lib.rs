@@ -39,6 +39,7 @@ methods!(
         match panic::catch_unwind(|| {
             // wrap rust computation to catch panic
             match Naive::new(
+                // handle rust errors in rust
                 lim.expect("Naive: Bad Limit"),
                 ct.expect("Naive: Bad Count"),
             )
@@ -66,6 +67,7 @@ methods!(
         match panic::catch_unwind(|| {
             // wrap rust computation to catch panic
             match SieveOfAtkin::new(
+                // handle rust errors in rust
                 lim.expect("SieveOfAtkin: Bad Limit"),
                 ct.expect("SieveOfAtkin: Bad Count"),
             )

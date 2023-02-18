@@ -1,5 +1,8 @@
-require_relative "ruby.rb"
-require_relative "rust.rb"
+# frozen_string_literal: true
+
+require_relative "ruby"
+require_relative "rust"
+require_relative "base"
 
 module Primes
   module Alg

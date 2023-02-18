@@ -36,7 +36,7 @@ impl Naive {
     pub fn naive(&self) -> PrimesResult {
         let mut primes: Vec<i64> = vec![2];
 
-        for n in 3..self.limit {
+        for n in 3..self.limit + 1 {
             let mut is_prime = true; // assume prime
             for prime in &primes {
                 if n as i64 % *prime == 0 {

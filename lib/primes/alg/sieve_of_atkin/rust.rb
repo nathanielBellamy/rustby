@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../base"
+require_relative "base"
 
 module Primes
   module Alg
@@ -8,7 +8,7 @@ module Primes
     module SieveOfAtkin
       # rust engine
       # rust code here: rust/primes/sieve_of_atkin.rs
-      class Rust < Primes::Alg::Base
+      class Rust < Base
         # find all primes <= max
         # => run it count times
         def run
@@ -17,6 +17,10 @@ module Primes
 
         def self.display_name
           "Sieve of Atkin"
+        end
+
+        def lang
+          "rust"
         end
 
         def self.lang
