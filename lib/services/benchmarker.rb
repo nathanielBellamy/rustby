@@ -14,17 +14,16 @@ module Services
       rust_res = nil
 
       Benchmark.bmbm do |x|
-        x.report(cli.ruby_marker) do
+        x.report(ruby_marker) do
           ruby_res = ruby_class.send(func, **args)
         end
 
-        x.report(cli.rust_marker) do
+        x.report(rust_marker) do
           rust_res = rust_class.send(func, **args)
         end
       end
 
-      cli.lang_res(lang_class: ruby_class, result: ruby_res)
-      cli.lang_res(lang_class: rust_class, result: rust_res)
+      { ruby: ruby_res, rust: rust_res }
     end
     # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
   end

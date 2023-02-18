@@ -19,8 +19,8 @@ module Primes
     def intro_message
       p divider
       p divider
-      p "                      === Welcome to rustby == "
-      p "                  === 🦀Rust🦀 Embedded in 💎Ruby💎 === "
+      p "                      === Welcome to 🦀rustby🐝 == "
+      p "              === Build in #{ruby_marker}. Optimize in #{rust_marker}. ==="
       p "                === thx. to github/danielpclark/rutie === "
       divider_with_space
       p " We will be finding primes up to #{@limit}."
@@ -80,22 +80,22 @@ module Primes
       HEREDOC
     end
 
-    def self.lang_res(mod, res, limit, count)
-      lang_marker = mod.lang == "ruby" ? self.ruby_marker : self.rust_marker
+    def lang_res(lang:, result:)
+      lang_marker = lang == "ruby" ? ruby_marker : rust_marker
       p ""
       p ""
-      p "#{lang_marker} found #{res.count} primes <= #{limit}"
-      p "It did so #{count} times using the #{mod.display_name} algorithm."
+      p "#{lang_marker} found #{result.count} primes <= #{limit}"
+      p "It did so #{count} times using the algorithm built in #{lang_marker} ."
       if limit > 5
-        p "[... #{res[-3, 3]&.join(", ")}]"
+        p "[... #{result[-3, 3]&.join(", ")}]"
       end
     end
 
-    def self.ruby_marker
+    def ruby_marker
       "💎RUBY"
     end
 
-    def self.rust_marker
+    def rust_marker
       "🦀RUST"
     end
   end

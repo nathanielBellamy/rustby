@@ -6,6 +6,7 @@ module Services
   # run algorithm in rust
   # fallback to ruby algorithm if rust errors
   class Fallbacker < Services::Base
+    #include Services::Base
     def run
       begin
         # run in rust
