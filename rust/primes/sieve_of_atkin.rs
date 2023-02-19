@@ -1,5 +1,4 @@
 use crate::primes::PrimesResult;
-use rutie::Integer;
 use std::error;
 use std::fmt;
 
@@ -18,10 +17,10 @@ impl fmt::Display for SieveOfAtkin {
 impl error::Error for SieveOfAtkin {}
 
 impl SieveOfAtkin {
-    pub fn new(lim: Integer, ct: Integer) -> SieveOfAtkin {
+    pub fn new(lim: u64, ct: u64) -> SieveOfAtkin {
         SieveOfAtkin {
-            limit: lim.to_u64(),
-            count: ct.to_u64(),
+            limit: lim,
+            count: ct,
         }
     }
 
@@ -34,6 +33,10 @@ impl SieveOfAtkin {
     }
 
     pub fn sieve_of_atkin(&self) -> PrimesResult {
+        if self.limit == 2 {
+            return Ok(vec![2]);
+        }
+
         let mut sieve: Vec<bool> = vec![false; (self.limit + 1) as usize]; // assumed composite until proven prime
         let max_xy: u64 = ((self.limit as f64).sqrt() + 1.0).ceil() as u64;
         for x in 1..max_xy {
@@ -49,7 +52,9 @@ impl SieveOfAtkin {
                     sieve[n as usize] = !sieve[n as usize]
                 }
 
-                n = 3 * x.pow(2) - y.pow(2);
+                // k used to avoid 'attempt to subtract with overflow'
+                let k: i64 = 3 * x.pow(2) as i64 - y.pow(2) as i64;
+                n = k as u64;
                 if x > y && n <= self.limit && n % 12 == 11 {
                     sieve[n as usize] = !sieve[n as usize]
                 }
@@ -74,5 +79,51 @@ impl SieveOfAtkin {
         }
 
         Ok(primes)
+    }
+}
+
+#[cfg(test)]
+mod sieve_of_atkin_spec {
+    use super::*;
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn run__returns_vec_containing_2_when_limit_is_2() {
+        let soa = SieveOfAtkin::new(2, 1);
+        match soa.run() {
+            Err(_) => panic!(),
+            Ok(res_vec) => {
+                assert_eq!(1, res_vec.len());
+                assert_eq!(2_i64, res_vec[0]);
+            }
+        }
+    }
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn run__returns_primes_result_ok_containing_vec_i64() {
+        let soa = SieveOfAtkin::new(3, 1);
+        match soa.run() {
+            Err(_) => panic!(),
+            Ok(res_vec) => {
+                assert_eq!(2, res_vec.len());
+                assert_eq!(2_i64, res_vec[0]);
+                assert_eq!(3_i64, res_vec[1]);
+            }
+        }
+    }
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn run__finds_all_primes_to_10k() {
+        let soa = SieveOfAtkin::new(10_000, 1);
+        match soa.run() {
+            Err(_) => panic!(),
+            Ok(res_vec) => {
+                assert_eq!(1229, res_vec.len());
+                assert_eq!(2_i64, res_vec[0]);
+                assert_eq!(9973_i64, res_vec[1228]);
+            }
+        }
     }
 }

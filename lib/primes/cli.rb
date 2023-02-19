@@ -35,6 +35,7 @@ module Primes
       p " We will run each computation #{count} time(s) in both Ruby and Rust."
       p " We will compare results provided by Ruby's Benchmark class."
       divider_with_space
+      pause(5, effect: true)
     end
 
     def pause(duration, effect: false)

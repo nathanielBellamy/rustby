@@ -7,7 +7,7 @@ RSpec.describe Primes::Alg::SieveOfAtkin::Rust do
   let(:soa_rust) { described_class.new(**args) }
 
   describe "run" do
-    it "calls rust RUST class exactly once" do # rust handles looping, ruby calls once
+    it "calls RUST class exactly once" do # rust handles looping, ruby calls once
       expect(soa_rust).to receive(:run).exactly(1).time.and_call_original
       expect(RUST).to receive(:sieve_of_atkin).exactly(1).time.and_call_original
 

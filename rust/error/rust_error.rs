@@ -19,3 +19,21 @@ impl RustError {
         error
     }
 }
+
+#[cfg(test)]
+mod rust_error_spec {
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn new__returns_rutie_array_of_length_2() {
+        // TODO: debug using rutie::VM::int() in multiple tests
+        // right now, causes segmentation fault
+        // on the bright-side, highlighted that prime structs
+        // should not depend on rutie
+
+        // let res = RustError::new("Oh no!");
+
+        // assert_eq!(2, res.length());
+        // assert_eq!("[\"RUST_ERROR\", \"Error: Oh no!\"]", res.to_s().to_str());
+    }
+}

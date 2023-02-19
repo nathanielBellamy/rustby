@@ -1,5 +1,4 @@
 use crate::primes::PrimesResult;
-use rutie::Integer;
 use std::error;
 use std::fmt;
 
@@ -18,10 +17,10 @@ impl fmt::Display for Naive {
 impl error::Error for Naive {}
 
 impl Naive {
-    pub fn new(lim: Integer, ct: Integer) -> Naive {
+    pub fn new(lim: u64, ct: u64) -> Naive {
         Naive {
-            limit: lim.to_u64(),
-            count: ct.to_u64(),
+            limit: lim,
+            count: ct,
         }
     }
 
@@ -51,5 +50,49 @@ impl Naive {
         }
 
         Ok(primes)
+    }
+}
+
+#[cfg(test)]
+mod naive_spec {
+    use super::*;
+    #[test]
+    #[allow(non_snake_case)]
+    fn run__returns_vec_containing_2_when_limit_is_2() {
+        let naive = Naive::new(2, 1);
+        match naive.run() {
+            Err(_) => panic!(),
+            Ok(res_vec) => {
+                assert_eq!(1, res_vec.len());
+                assert_eq!(2_i64, res_vec[0]);
+            }
+        }
+    }
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn run__returns_primes_result_ok_containing_vec_i64() {
+        let naive = Naive::new(1_000, 1);
+        match naive.run() {
+            Err(_) => panic!(),
+            Ok(res_vec) => {
+                assert_eq!(168, res_vec.len());
+                assert_eq!(2_i64, res_vec[0]);
+            }
+        }
+    }
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn run__finds_all_primes_to_10k() {
+        let naive = Naive::new(10_000, 1);
+        match naive.run() {
+            Err(_) => panic!(),
+            Ok(res_vec) => {
+                assert_eq!(1229, res_vec.len());
+                assert_eq!(2_i64, res_vec[0]);
+                assert_eq!(9973_i64, res_vec[1228]);
+            }
+        }
     }
 }

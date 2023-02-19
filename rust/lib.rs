@@ -40,8 +40,8 @@ methods!(
             // wrap rust computation to catch panic
             match Naive::new(
                 // handle rust errors in rust
-                lim.expect("Naive: Bad Limit"),
-                ct.expect("Naive: Bad Count"),
+                lim.expect("Naive: Bad Limit").to_u64(),
+                ct.expect("Naive: Bad Count").to_u64(),
             )
             .run()
             {
@@ -68,8 +68,8 @@ methods!(
             // wrap rust computation to catch panic
             match SieveOfAtkin::new(
                 // handle rust errors in rust
-                lim.expect("SieveOfAtkin: Bad Limit"),
-                ct.expect("SieveOfAtkin: Bad Count"),
+                lim.expect("SieveOfAtkin: Bad Limit").to_u64(),
+                ct.expect("SieveOfAtkin: Bad Count").to_u64(),
             )
             .run()
             {
@@ -109,4 +109,14 @@ pub extern "C" fn Init_rustby() {
         klass.def_self("rust_error", rust_error);
         klass.def_self("make_rust_panic", make_rust_panic);
     });
+}
+
+#[cfg(test)]
+mod lib_spec {
+
+    #[test]
+    #[allow(non_snake_case)]
+    fn lib__is_here() {
+        assert_eq!(true, true);
+    }
 }
