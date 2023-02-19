@@ -1,6 +1,7 @@
 # 🦀rustby🐝
 
 ### 💎 Ruby w. Embedded Rust 🦀  with [rutie](https://github.com/danielpclark/rutie)
+### [GH Project](https://github.com/users/nathanielBellamy/projects/2)
 
 #### Build in Ruby  ->  Optimize (Sting) with Rust  ->  Fall Back on Ruby (if it doesn't work out)
 
@@ -10,15 +11,15 @@
   - maintain full functionality in Ruby
 - Optimize in [Rust](https://www.rust-lang.org/)
   - translate performance sensitive operations into Rust
-  - compare Ruby and Rust performance using `Services::Benchmarker`
+  - compare Ruby and Rust performance using [Benchmarker](https://github.com/nathanielBellamy/rustby/blob/main/lib/services/benchmarker.rb#L8)
 - Fallback on Ruby
-  - if there is any error in Rust, default to performing the computation in Ruby
-  - wrap your Rust code in a Ruby default using `Services::Fallbacker`
+  - worst case, it's Ruby
+  - wrap your Rust code in a default Ruby implimentation using [Fallbacker](https://github.com/nathanielBellamy/rustby/blob/main/lib/services/fallbacker.rb#L8) 
 
 ### why 🦀rustby🐝
 
+- the safety of Ruby
 - the speed of Rust when you need it
-- the safety of Ruby always
 
 ### to run:
 
@@ -39,7 +40,7 @@
       - increase to stress test memory usage
     - `{count} - 💎Integer, 🦀u64`
       - run the computation this many times
-      - increase to stress test computation
+      - increase to stress test computation speed
     - `{alg_str} - 💎String`
       - select algorithm for computation
       - can be:
