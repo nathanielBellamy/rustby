@@ -12,6 +12,7 @@ RuboCop::RakeTask.new
 
 # primes module
 import "rakelib/primes/benchmark.rake"
+import "rakelib/primes/demo.rake"
 import "rakelib/primes/rust.rake"
 import "rakelib/primes/ruby.rake"
 

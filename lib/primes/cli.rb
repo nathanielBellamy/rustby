@@ -29,6 +29,52 @@ module Primes
       divider_with_space
     end
 
+    def fallback_intro
+      p divider_with_space
+      p "🦀rustby🐝 provides a Fallbacker class that:"
+      p " => allows computation in Rust with a failsafe to Ruby"
+      p " => Fallbacker accepts a Ruby module MyMod (e.g. Primes::Alg::SieveOfAtkin)"
+      p " => this module should contain both a Ruby and Rust Class (e.g. MyMod::Ruby, MyMod::Rust)"
+      p "     => both classes should use the same initializer (likely inherited from a base class)"
+      p "     => the Ruby class can impliment the algorithm in Ruby in the class definition"
+      p "     => the Rust class impliments a method by the same name which wraps a method defined on the RUST class"
+      p " => the goal of Fallbacker is to make 🦀rustby🐝 as safe as Pure Ruby"
+      p " => you can write all of your code in Ruby and selectively optimize into Rust, without sacrificing safety"
+      p divider_with_space
+      p " To demonstrate, we will call the Fallbacker class as follows:"
+      p ""
+      p " => Services::Fallbacker.new(            "
+      p "        mod: Primes::Alg::SieveOfAtkin,  "
+      p "         func: demo_fallback,            "
+      p "          args: {                        "
+      p "           limit: cli.limit,             "
+      p "           count: cli.count              "
+      p "          }                              "
+      p "       )                                 "
+      p empty_line
+      p " In this case, the Fallbacker flow is:"
+      p " => Fallbacker calls"
+      p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count)"
+      p " => this method wraps a call to RUST.make_rust_panic, which does as the name implies "
+      p " => Rust code will catch this panic and return an error to Ruby"
+      p " => Fallbacker receives the error and completes the computation by calling"
+      p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count) "
+      p empty_line
+      p " After the computation has run, you should see a Rust error reported to the console:"
+      p "     thread '<unnamed>' panicked at 'RUST PANIC!', rust/test/panic_on_purpose.rs:7:9"
+      p "     note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+      p empty_line
+      p " as well as the full results, that will have been computed in Ruby."
+      p divider_with_space
+      p " Let's see it in action:"
+      p " ...3"
+      p " ...2"
+      p " ...1"
+      p " !GO!"
+      p empty_line
+      p empty_line
+    end
+
     def outro_message
       p empty_line
       p empty_line

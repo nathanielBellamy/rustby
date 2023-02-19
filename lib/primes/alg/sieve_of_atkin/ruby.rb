@@ -17,6 +17,11 @@ module Primes
           results
         end
 
+        def demo_fallback
+          # demonstrate what happens when rust panics
+          run
+        end
+
         # TODO: refactor to appease rubocop
         # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
         def sieve_of_atkin

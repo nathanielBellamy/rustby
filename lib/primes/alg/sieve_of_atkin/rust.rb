@@ -15,6 +15,11 @@ module Primes
           RUST.sieve_of_atkin(limit, count)
         end
 
+        def demo_fallback
+          # demonstrate what happens when rust panics
+          RUST.make_rust_panic
+        end
+
         def self.display_name
           "Sieve of Atkin"
         end
