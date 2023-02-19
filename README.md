@@ -12,8 +12,10 @@
   - maintain full functionality in Ruby
 - Optimize in [Rust](https://www.rust-lang.org/)
   - translate performance sensitive operations into Rust
+  - compare Ruby and Rust performance using `Services::Benchmarker`
 - Fallback on Ruby
   - if there is any error in Rust, default to performing the computation in Ruby
+  - wrap your Rust code in a Ruby default using `Services::Fallbacker`
 
 ### why 🦀rustby🐝
 
@@ -23,6 +25,8 @@
 ### to run:
 
 - `rake --tasks`
+- `rake build:main`
+  - bundle gems and build rust
 - `rake spec:run`
   - runs `rspec` and `cargo test`
   - builds rust before running `rspec`
