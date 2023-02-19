@@ -16,5 +16,6 @@ group :test do
   gem "rspec", "~> 3.0"
 end
 
-
-
+group :io do
+  gem 'tty-spinner', '~> 0.9.3'
+end

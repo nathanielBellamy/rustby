@@ -32,8 +32,7 @@ namespace :primes do
     end
 
     desc "=>  rake primes:demo:fallback  =>  " \
-         "Demo Fallback from Rust to Ruby Using Primes" \
-
+         "Demo Fallback from Rust to Ruby Using Primes"
     task :fallback do
       suppress_input_as_tasks
       Rustby.init_rust

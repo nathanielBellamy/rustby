@@ -1,3 +1,5 @@
+require "tty-spinner"
+
 module Primes
     # provide cli functionality
   class Cli
@@ -15,13 +17,16 @@ module Primes
                   count: @count }
     end
 
-    # rubocop:disable Metrics/MethodLength
-    def intro_message
-      p divider
-      p divider
+    def welcome
       p "                      === Welcome to 🦀rustby🐝 == "
       p "              === Build in #{ruby_marker}. Optimize in #{rust_marker}. ==="
       p "                === thx. to github/danielpclark/rutie === "
+    end
+
+    # rubocop:disable Metrics/MethodLength
+    def intro_message
+      p divider
+      welcome
       divider_with_space
       p " We will be finding primes up to #{limit}."
       p " We will run each computation #{count} time(s) in both Ruby and Rust."
@@ -29,8 +34,20 @@ module Primes
       divider_with_space
     end
 
+    def pause(duration)
+      spinner = TTY::Spinner.new(format: :spin_2);
+      spinner.auto_spin
+      sleep duration
+      spinner.success
+    end
+
     def fallback_intro
+      p divider
+      p "                      === Welcome to 🦀rustby🐝 == "
+      p "              === Build in #{ruby_marker}. Optimize in #{rust_marker}. ==="
+      p "                === thx. to github/danielpclark/rutie === "
       p divider_with_space
+      pause(3)
       p "🦀rustby🐝 provides a Fallbacker class that:"
       p " => allows computation in Rust with a failsafe to Ruby"
       p " => Fallbacker accepts a Ruby module MyMod (e.g. Primes::Alg::SieveOfAtkin)"
@@ -41,6 +58,8 @@ module Primes
       p " => the goal of Fallbacker is to make 🦀rustby🐝 as safe as Pure Ruby"
       p " => you can write all of your code in Ruby and selectively optimize into Rust, without sacrificing safety"
       p divider_with_space
+      pause(10)
+
       p " To demonstrate, we will call the Fallbacker class as follows:"
       p ""
       p " => Services::Fallbacker.new(            "
@@ -52,6 +71,7 @@ module Primes
       p "          }                              "
       p "       )                                 "
       p empty_line
+      pause(10)
       p " In this case, the Fallbacker flow is:"
       p " => Fallbacker calls"
       p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count)"
@@ -60,16 +80,20 @@ module Primes
       p " => Fallbacker receives the error and completes the computation by calling"
       p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count) "
       p empty_line
+      pause(10)
       p " After the computation has run, you should see a Rust error reported to the console:"
       p "     thread '<unnamed>' panicked at 'RUST PANIC!', rust/test/panic_on_purpose.rs:7:9"
       p "     note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
-      p empty_line
       p " as well as the full results, that will have been computed in Ruby."
       p divider_with_space
+      pause(5)
       p " Let's see it in action:"
       p " ...3"
+      pause(1)
       p " ...2"
+      pause(1)
       p " ...1"
+      pause(1)
       p " !GO!"
       p empty_line
       p empty_line
