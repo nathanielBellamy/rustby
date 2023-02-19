@@ -15,7 +15,7 @@ namespace :primes do
         count: 10
       )
 
-      cli.intro_message
+      cli.benchmarking_intro
       cli.benchmarking
 
       results = Services::Benchmarker.new(

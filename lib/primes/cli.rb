@@ -6,9 +6,11 @@ module Primes
     attr_reader :limit, :alg_str, :count, :mod
 
     def initialize(args)
-      @limit = args[:limit].to_i == 0 ? 1_000 : args[:limit].to_i
+      limit = args[:limit].to_i
+      limit_invalid =  limit < 2
+      @limit = limit_invalid ? 1_000 : limit
       @alg_str = args[:alg_str] || "sieve_of_atkin"
-      @count = args[:count].to_i == 0 ? 2 : args[:count].to_i
+      @count = args[:count].to_i == 0 ? 1 : args[:count].to_i
     end
 
     def args
@@ -24,9 +26,10 @@ module Primes
     end
 
     # rubocop:disable Metrics/MethodLength
-    def intro_message
+    def benchmarking_intro
       p divider
       welcome
+      pause(5, effect: true)
       divider_with_space
       p " We will be finding primes up to #{limit}."
       p " We will run each computation #{count} time(s) in both Ruby and Rust."
@@ -34,20 +37,19 @@ module Primes
       divider_with_space
     end
 
-    def pause(duration)
-      spinner = TTY::Spinner.new(format: :spin_2);
-      spinner.auto_spin
+    def pause(duration, effect: false)
+      spinner_1 = TTY::Spinner.new(format: :bouncing_ball)
+      p " === Pausing For Effect === " if effect
+      spinner_1.auto_spin
       sleep duration
-      spinner.success
+      spinner_1.success("")
     end
 
     def fallback_intro
       p divider
-      p "                      === Welcome to 🦀rustby🐝 == "
-      p "              === Build in #{ruby_marker}. Optimize in #{rust_marker}. ==="
-      p "                === thx. to github/danielpclark/rutie === "
+      welcome
       p divider_with_space
-      pause(3)
+      pause(3, effect: true)
       p "🦀rustby🐝 provides a Fallbacker class that:"
       p " => allows computation in Rust with a failsafe to Ruby"
       p " => Fallbacker accepts a Ruby module MyMod (e.g. Primes::Alg::SieveOfAtkin)"
@@ -58,7 +60,7 @@ module Primes
       p " => the goal of Fallbacker is to make 🦀rustby🐝 as safe as Pure Ruby"
       p " => you can write all of your code in Ruby and selectively optimize into Rust, without sacrificing safety"
       p divider_with_space
-      pause(10)
+      pause(10, effect: true)
 
       p " To demonstrate, we will call the Fallbacker class as follows:"
       p ""
@@ -71,7 +73,7 @@ module Primes
       p "          }                              "
       p "       )                                 "
       p empty_line
-      pause(10)
+      pause(10, effect: true)
       p " In this case, the Fallbacker flow is:"
       p " => Fallbacker calls"
       p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count)"
@@ -80,13 +82,13 @@ module Primes
       p " => Fallbacker receives the error and completes the computation by calling"
       p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count) "
       p empty_line
-      pause(10)
+      pause(10, effect: true)
       p " After the computation has run, you should see a Rust error reported to the console:"
       p "     thread '<unnamed>' panicked at 'RUST PANIC!', rust/test/panic_on_purpose.rs:7:9"
       p "     note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
       p " as well as the full results, that will have been computed in Ruby."
       p divider_with_space
-      pause(5)
+      pause(5, effect: true)
       p " Let's see it in action:"
       p " ...3"
       pause(1)
@@ -110,6 +112,7 @@ module Primes
       p "       the performance of the first benchmark, which is Ruby in our case."
       p "    => The second result is the more accurate, although some variance is inevitable."
       p " On my system I see Rust outperforming Ruby by a substantial margin on both passes."
+      pause(10)
       divider_with_space
       p "                     🐝💎🦀 Thanks for stopping by! 🦀💎🐝"
       divider_with_space
