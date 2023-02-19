@@ -1,10 +1,8 @@
 # 🦀rustby🐝
 
-### 💎 Ruby w. Embedded Rust 🦀
+### 💎 Ruby w. Embedded Rust 🦀  with [rutie](https://github.com/danielpclark/rutie)
 
 #### Build in Ruby  ->  Optimize (Sting) with Rust  ->  Fall Back on Ruby (if it doesn't work out)
-
-##### built with [rutie](https://github.com/danielpclark/rutie)
 
 ## intro to 🦀rustby🐝
 
