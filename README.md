@@ -1,4 +1,4 @@
-# 🦀 rustby 🐝
+# 🦀rustby🐝
 
 ### 💎 Ruby w. Embedded Rust 🦀
 
@@ -15,18 +15,22 @@
 - Fallback on Ruby
   - if there is any error in Rust, default to performing the computation in Ruby
 
+### why 🦀rustby🐝
+
+- the speed of Rust when you need it
+- the safety of Ruby always
+
 ### to run:
 
 - `rake --tasks`
 - `rake spec:run`
-  - runs both ruby and rust tests
+  - runs `rspec` and `cargo test`
   - builds rust before running `rspec`
 
 #### primes
 
   - primes is the example module around which 🦀rustby🐝 has been built
-  - algorithms to compute primes have been constructed in in both 💎ruby and 🦀rust
-  - computing primes is a useful computation for stress testing performance of each language
+  - algorithms to compute primes have been constructed in both ruby and rust
   - args
     - `{limit} - 💎Integer, 🦀u64`
       - compute all primes less than or equal to
@@ -34,6 +38,11 @@
     - `{count} - 💎Integer, 🦀u64`
       - run the computation this many times
       - increase to stress test computation
+    - `{alg_str} - 💎String`
+      - select algorithm for computation
+      - can be:
+        - `sieve_of_at, soa, s`
+        - `naive, n`
 
 ##### demo 🦀rustby🐝 using primes
 
@@ -43,9 +52,6 @@
 ##### compute using 💎ruby
 
  - `rake primes:ruby:main {limit} {alg_str}`
-    - alg_str can be:
-      - `sieve_of_at, soa, s`
-      - `naive, n`
  - `rake primes:ruby:sieve_of_atkin {limit}`
  - `rake primes:ruby:naive {limit}`
 
