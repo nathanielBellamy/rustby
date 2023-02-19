@@ -3,7 +3,7 @@ require "rutie"
 
 namespace :primes do
   namespace :demo do
-    desc  "=>  rake primes:demo:benchmark  =>  " \
+    desc  "💎🦀=>  rake primes:demo:benchmark  =>  " \
           "Demo Benchmarking Rust and Ruby Performance Using Primes"
     task :benchmark do
       suppress_input_as_tasks
@@ -31,7 +31,7 @@ namespace :primes do
       cli.lang_res(lang: 'rust', result: results[:rust])
     end
 
-    desc "=>  rake primes:demo:fallback  =>  " \
+    desc "💎🦀=>  rake primes:demo:fallback  =>  " \
          "Demo Fallback from Rust to Ruby Using Primes"
     task :fallback do
       suppress_input_as_tasks

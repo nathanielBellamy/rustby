@@ -4,12 +4,12 @@ require "rutie"
 namespace :spec do
   desc "Build Rust and Run Rspec"
   task :run do
-    `cargo test`
     `cargo clean`
-    `cargo clippy`
-    `cargo build --release`
 
-    Rake::Task['build:rust'].invoke
-    `rspec`
+    p " => Cargo Test: <="
+    pp `cargo test`
+    `cargo build --release` # always build for release before running rspec
+    p " => Rspec: <="
+    pp `rspec`
   end
 end
