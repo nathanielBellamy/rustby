@@ -1,6 +1,6 @@
 # 🦀rustby🐝
 
-### 💎 Ruby w. Embedded Rust 🦀  with [rutie](https://github.com/danielpclark/rutie)
+### 💎 Ruby w. Embedded Rust 🦀 (thx. to [rutie](https://github.com/danielpclark/rutie))
 ### [GH Project](https://github.com/users/nathanielBellamy/projects/2)
 
 #### Build in Ruby  ->  Optimize (Sting) with Rust  ->  Fall Back on Ruby (if it doesn't work out)
