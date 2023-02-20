@@ -6,7 +6,7 @@ namespace :primes do
     desc "🦀=>  rake primes:rust:sieve_of_atkin {limit}  =>  " \
          "Find primes using the given algorithm built in 🦀Rust"
     task :main do
-      suppress_input_as_tasks
+      init_task(rust: false)
 
       cli = Primes::Cli.new(
         limit: ARGV[1],
@@ -25,8 +25,7 @@ namespace :primes do
     desc "🦀=>  rake primes:rust:sieve_of_atkin {limit}  =>  " \
          "Find primes using the Sieve Of Atkin algorithm built in 🦀Rust"
     task :sieve_of_atkin do
-      suppress_input_as_tasks
-      Rustby.init_rust
+      init_task
 
       cli = Primes::Cli.new(
         limit: ARGV[1],

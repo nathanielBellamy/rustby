@@ -14,16 +14,19 @@
   - compare Ruby and Rust performance using [Benchmarker](https://github.com/nathanielBellamy/rustby/blob/main/lib/services/benchmarker.rb#L8)
 - Fallback on Ruby
   - worst case, it's Ruby
-  - wrap your Rust code in a default Ruby implimentation using [Fallbacker](https://github.com/nathanielBellamy/rustby/blob/main/lib/services/fallbacker.rb#L8) 
+  - wrap your Rust code in a default Ruby implimentation using [Fallbacker](https://github.com/nathanielBellamy/rustby/blob/main/lib/services/fallbacker.rb#L8)
 
-### why 🦀rustby🐝
+### motivation
 
-- the safety of Ruby
-- the speed of Rust when you need it
+- Ruby wins in development speed
+- Rust wins in computational speed
+- Build day-to-day in Ruby
+- Use the speed of Rust when you need it
 
 ### to run:
 
 - `rake --tasks`
+- `rake main`
 - `rake build:main`
   - bundle gems and build rust
 - `rake spec:run`

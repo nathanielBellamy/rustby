@@ -1,8 +1,9 @@
 require "tty-spinner"
+require_relative "../../lib/cli/mod"
 
 module Primes
     # provide cli functionality
-  class Cli
+  class Cli < Cli::Base
     attr_reader :limit, :alg_str, :count, :mod
 
     def initialize(args)
@@ -19,18 +20,16 @@ module Primes
                   count: @count }
     end
 
-    def welcome
-      p "                      === Welcome to 🦀rustby🐝 == "
-      p "              === Build in #{ruby_marker}. Optimize in #{rust_marker}. ==="
-      p "                === thx. to github/danielpclark/rutie === "
-    end
-
     # rubocop:disable Metrics/MethodLength
     def benchmarking_intro
       p divider
-      welcome
+      p "🦀rustby🐝 provides a Benchmarker class:"
+      p "  => a thin wrapper to the standard Benchmark class in Ruby"
+      p "  => designed specifically to compare the performance of Ruby and Rust"
       pause(5, effect: true)
       divider_with_space
+      p " To demonstrate.."
+      pause(1)
       p " We will be finding primes up to #{limit}."
       p " We will run each computation #{count} time(s) in both Ruby and Rust."
       p " We will compare results provided by Ruby's Benchmark class."
@@ -38,58 +37,50 @@ module Primes
       pause(5, effect: true)
     end
 
-    def pause(duration, effect: false)
-      spinner_1 = TTY::Spinner.new(format: :bouncing_ball)
-      p " === Pausing For Effect === " if effect
-      spinner_1.auto_spin
-      sleep duration
-      spinner_1.success("")
-    end
-
     def fallback_intro
       p divider
-      welcome
       p divider_with_space
-      pause(3, effect: true)
       p "🦀rustby🐝 provides a Fallbacker class that:"
       p " => allows computation in Rust with a failsafe to Ruby"
       p " => Fallbacker accepts a Ruby module MyMod (e.g. Primes::Alg::SieveOfAtkin)"
-      p " => this module should contain both a Ruby and Rust Class (e.g. MyMod::Ruby, MyMod::Rust)"
-      p "     => both classes should use the same initializer (likely inherited from a base class)"
-      p "     => the Ruby class can impliment the algorithm in Ruby in the class definition"
-      p "     => the Rust class impliments a method by the same name which wraps a method defined on the RUST class"
-      p " => the goal of Fallbacker is to make 🦀rustby🐝 as safe as Pure Ruby"
-      p " => you can write all of your code in Ruby and selectively optimize into Rust, without sacrificing safety"
+      p " => this module contain both a Ruby and Rust Class -- MyMod::Ruby, MyMod::Rust"
+      p " => Fallbacker will first perform the computation in Rust"
+      p "     => if anything goes wrong, it performs it in Ruby"
+      p " with the idea to:"
+      p "     => write all code in Ruby"
+      p "     => selectively optimize into Rust when performance matters"
+      p "     => sting when it counts"
       p divider_with_space
-      pause(10, effect: true)
+      pause(20, effect: true)
 
       p " To demonstrate, we will call the Fallbacker class as follows:"
       p ""
       p " => Services::Fallbacker.new(            "
-      p "        mod: Primes::Alg::SieveOfAtkin,  "
-      p "         func: demo_fallback,            "
-      p "          args: {                        "
-      p "           limit: cli.limit,             "
-      p "           count: cli.count              "
-      p "          }                              "
-      p "       )                                 "
+      p "      mod: Primes::Alg::SieveOfAtkin,    "
+      p "      func: demo_fallback,               "
+      p "      args: {                            "
+      p "        limit: #{limit},              "
+      p "        count: #{count}               "
+      p "      }                                  "
+      p "     )                                   "
       p empty_line
-      pause(10, effect: true)
+      pause(15, effect: true)
       p " In this case, the Fallbacker flow is:"
       p " => Fallbacker calls"
-      p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count)"
-      p " => this method wraps a call to RUST.make_rust_panic, which does as the name implies "
+      p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: #{limit}, count: #{count}) (🦀)"
+      p " => this method would generally wrap a call to a computational method on the RUST class"
+      p " => for the purposes of this demonstration, it wraps a call to RUST.make_rust_panic"
       p " => Rust code will catch this panic and return an error to Ruby"
       p " => Fallbacker receives the error and completes the computation by calling"
-      p "        Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: limit, count: count) "
+      p "        Primes::Alg::SieveOfAtkin::Ruby.demo_fallback(limit: #{limit}, count: #{count}) (💎)"
       p empty_line
-      pause(10, effect: true)
+      pause(15, effect: true)
       p " After the computation has run, you should see a Rust error reported to the console:"
       p "     thread '<unnamed>' panicked at 'RUST PANIC!', rust/test/panic_on_purpose.rs:7:9"
       p "     note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
       p " as well as the full results, that will have been computed in Ruby."
       p divider_with_space
-      pause(5, effect: true)
+      pause(10, effect: true)
       p " Let's see it in action:"
       p " ...3"
       pause(1)
@@ -97,7 +88,7 @@ module Primes
       pause(1)
       p " ...1"
       pause(1)
-      p " !GO!"
+      p " GO "
       p empty_line
       p empty_line
     end
@@ -114,28 +105,9 @@ module Primes
       p "    => The second result is the more accurate, although some variance is inevitable."
       p " On my system I see Rust outperforming Ruby by a substantial margin on both passes."
       pause(10)
-      divider_with_space
-      p "                     🐝💎🦀 Thanks for stopping by! 🦀💎🐝"
-      divider_with_space
+      outro
     end
     # rubocop:enable Metrics/MethodLength
-
-    def divider_with_space
-      p empty_line
-      p empty_line
-      p divider
-      p divider
-      p empty_line
-      p empty_line
-    end
-
-    def divider
-      " ====================================================================="
-    end
-
-    def empty_line
-      ""
-    end
 
     def benchmarking
       p " Benchmarking..."

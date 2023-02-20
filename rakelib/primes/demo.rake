@@ -38,9 +38,9 @@ namespace :primes do
       Rustby.init_rust
 
       cli = Primes::Cli.new(
-        limit: 1500,
+        limit: ARGV[1],
         alg_string: 'sieve_of_atkin',
-        count: 1
+        count: ARGV[2]
       )
 
       cli.fallback_intro
@@ -55,6 +55,8 @@ namespace :primes do
       ).run
 
       cli.full_res(lang: 'ruby', result: results)
+
+      cli.outro
     end
   end
 end

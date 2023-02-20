@@ -8,7 +8,7 @@ namespace :spec do
 
     p " => Cargo Test: <="
     pp `cargo test`
-    `cargo build --release` # always build for release before running rspec
+    `cargo build --release` # always build for release before running rspecr
     p " => Rspec: <="
     pp `rspec`
   end

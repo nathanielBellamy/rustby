@@ -2,12 +2,38 @@ require_relative "../../lib/rustby"
 require "rutie"
 
 namespace :primes do
+  desc "💎🦀=>  rake primes:benchmark {limit} {count}  =>  " \
+       "Benchmark Ruby and Rust using all available algorithms. "
+  task :benchmark do
+    init_task(rust: true)
+
+    cli = Primes::Cli.new(
+      limit: ARGV[1],
+      alg_string: "sieve_of_atkin",
+      count: ARGV[2]
+    )
+
+    cli.benchmarking_intro
+
+    results = Services::Benchmarker.new(
+      mod: Primes::Alg::SieveOfAtkin,
+      func: "public_run",
+      args: {
+        limit: cli.limit,
+        count: cli.count
+      },
+    ).run
+
+    cli.lang_res(lang: 'ruby', result: results[:ruby])
+    cli.lang_res(lang: 'rust', result: results[:rust])
+  end
+
+
   namespace :benchmark do
     desc "💎🦀=>  rake primes:benchmark:sieve_of_atkin {limit} {count}  =>  " \
          "Find Primes Using the Sieve of Atkin Algorithm"
     task :sieve_of_atkin do
-      suppress_input_as_tasks
-      Rustby.init_rust
+      init_task(rust: true)
 
       cli = Primes::Cli.new(
         limit: ARGV[1],
@@ -33,8 +59,7 @@ namespace :primes do
     desc "💎🦀=>  rake primes:naive {limit} {count}  =>  " \
          "Find Primes Using a Naive Algorithm"
     task :naive do
-      suppress_input_as_tasks
-      Rustby.init_rust
+      init_task(rust: true)
 
       cli = Primes::Cli.new(
         limit: ARGV[1],
@@ -56,12 +81,5 @@ namespace :primes do
       cli.lang_res(lang: 'ruby', result: results[:ruby])
       cli.lang_res(lang: 'rust', result: results[:rust])
     end
-  end
-
-  def suppress_input_as_tasks
-    # prevents errors of the form:
-    #   rake aborted!
-    #   Don't know how to build task {cli_input} (See the list of available tasks with `rake --tasks`)
-    ARGV.each { |a| task a.to_sym {} }
   end
 end
