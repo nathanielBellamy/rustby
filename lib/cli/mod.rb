@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "cli_base"
+require_relative "base"
 
 module Cli
   class Error < StandardError; end

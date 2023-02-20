@@ -4,12 +4,11 @@ require "rutie"
 namespace :spec do
   desc "Build Rust and Run Rspec"
   task :run do
+    puts "\n  => Cargo Test: <= \n "
     `cargo clean`
-
-    p " => Cargo Test: <="
-    pp `cargo test`
+    puts `cargo test`
     `cargo build --release` # always build for release before running rspecr
-    p " => Rspec: <="
-    pp `rspec`
+    puts "\n => Rspec: <= \n "
+    puts `rspec`
   end
 end

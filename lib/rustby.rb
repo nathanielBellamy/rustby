@@ -31,19 +31,6 @@ module Rustby
   end
 
   def self.main(cli)
-    self.init_rust
-
-    cli.intro_message
-    cli.benchmarking
-    # find all primes less than or equal to limit in each language
-    # => run each program k times
-    # => return results
-    Primes::Services::Benchmarker.new(
-      alg_str: cli.args[:alg_str],
-      limit: cli.args[:limit],
-      count: cli.args[:count]
-    ).run
-
-    cli.outro_message
+    Rake::Task['main'].execute
   end
 end

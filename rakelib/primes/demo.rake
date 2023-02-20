@@ -6,8 +6,7 @@ namespace :primes do
     desc  "💎🦀=>  rake primes:demo:benchmark  =>  " \
           "Demo Benchmarking Rust and Ruby Performance Using Primes"
     task :benchmark do
-      suppress_input_as_tasks
-      Rustby.init_rust
+      init_task(rust: true)
 
       cli = Primes::Cli.new(
         limit: 5_432_10,
@@ -15,7 +14,7 @@ namespace :primes do
         count: 10
       )
 
-      cli.benchmarking_intro
+      cli.benchmarking_intro(demo: true)
       cli.benchmarking
 
       results = Services::Benchmarker.new(
@@ -29,13 +28,15 @@ namespace :primes do
 
       cli.lang_res(lang: 'ruby', result: results[:ruby])
       cli.lang_res(lang: 'rust', result: results[:rust])
+
+      cli.benchmarking_outro
+      cli.outro
     end
 
     desc "💎🦀=>  rake primes:demo:fallback  =>  " \
          "Demo Fallback from Rust to Ruby Using Primes"
     task :fallback do
-      suppress_input_as_tasks
-      Rustby.init_rust
+      init_task(rust: true)
 
       cli = Primes::Cli.new(
         limit: ARGV[1],

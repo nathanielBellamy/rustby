@@ -25,13 +25,15 @@
 
 ### to run:
 
-- `rake --tasks`
-- `rake main`
-- `rake build:main`
-  - bundle gems and build rust
-- `rake spec:run`
-  - runs `rspec` and `cargo test`
-  - builds rust before running `rspec`
+- clone repo + run
+  - `rake main`
+  - `rake --tasks`
+  - `rake build:main`
+    - bundle gems and build rust
+- to run tests
+  - `rake spec:run`
+    - runs `rspec` and `cargo test`
+    - builds Rust code before running `rspec`
 
 #### primes
 
@@ -57,20 +59,21 @@
 
 ##### compute using 💎ruby
 
- - `rake primes:ruby:main {limit} {alg_str}`
+ - `rake primes:ruby {limit} {alg_str}`
  - `rake primes:ruby:sieve_of_atkin {limit}`
  - `rake primes:ruby:naive {limit}`
 
 ##### compute using 🦀rust
 
- - `rake primes:rust:main {limit} {alg_str}`
+ - `rake primes:rust {limit} {alg_str}`
  - `rake primes:rust:sieve_of_atkin {limit}`
  - `rake primes:rust:naive {limit}`
 
 ##### benchmark performance: 💎ruby vs. 🦀rust
 
+ - `rake primes:benchmark {limit} {count}`
  - `rake primes:benchmark:sieve_of_atkin {limit} {count}`
- - `rake primes:benchmark:sieve_of_atkin {limit} {count}`
+ - `rake primes:benchmark:naive {limit} {count}`
 
 ## License
 
