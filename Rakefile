@@ -9,7 +9,6 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-
 # primes module
 import "rakelib/primes/benchmark.rake"
 import "rakelib/primes/demo.rake"
@@ -27,6 +26,5 @@ def suppress_input_as_tasks
   # prevents errors of the form:
   #   rake aborted!
   #   Don't know how to build task {cli_input} (See the list of available tasks with `rake --tasks`)
-  ARGV.each { |a| task a.to_sym {} }
+  ARGV.each { |a| task(a.to_sym {}) }
 end
-

@@ -4,6 +4,7 @@ require_relative "naive/mod"
 require_relative "sieve_of_atkin/mod"
 
 module Primes
+  # compute primes using different algorithms
   module Alg
     def self.mod(alg_str)
       case alg_str

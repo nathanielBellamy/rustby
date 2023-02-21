@@ -19,22 +19,22 @@ module Primes
           results
         end
 
+        # rubocop:disable Metrics/MethodLength
         def naive
           primes = [2]
-
           (3..@limit).each do |n|
             is_prime = true # assume prime
             primes.each do |prime|
-              if n % prime == 0 # until proven composite
+              if (n % prime).zero? # until proven composite
                 is_prime = false
                 break
               end
             end
             primes.push(n) if is_prime
           end
-
           primes
         end
+        # rubocop:enable Metrics/MethodLength
 
         def self.display_name
           "Naive"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../../lib/rustby"
 require "rutie"
 
@@ -13,12 +15,12 @@ namespace :primes do
       count: 1
     )
 
-    res = Primes::Alg::mod(cli.alg_str)::Ruby.new(
+    res = Primes::Alg.mod(cli.alg_str)::Ruby.new(
       limit: cli.limit,
       count: cli.count
     ).run
 
-    cli.full_res(lang: 'ruby', result: res)
+    cli.full_res(lang: "ruby", result: res)
   end
 
   namespace :ruby do
@@ -29,7 +31,7 @@ namespace :primes do
 
       cli = Primes::Cli.new(
         limit: ARGV[1],
-        alg_string: 'sieve_of_atkin',
+        alg_string: "sieve_of_atkin",
         count: 1
       )
 
@@ -38,7 +40,7 @@ namespace :primes do
         count: cli.count
       ).run
 
-      cli.full_res(lang: 'ruby', result: res)
+      cli.full_res(lang: "ruby", result: res)
     end
 
     desc "💎=>  rake primes:ruby:naive {limit}  =>  " \
@@ -48,7 +50,7 @@ namespace :primes do
 
       cli = Primes::Cli.new(
         limit: ARGV[1],
-        alg_string: 'naive',
+        alg_string: "naive",
         count: 1
       )
 
@@ -57,7 +59,7 @@ namespace :primes do
         count: cli.count
       ).run
 
-      cli.full_res(lang: 'ruby', result: res)
+      cli.full_res(lang: "ruby", result: res)
     end
   end
 end

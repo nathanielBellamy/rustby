@@ -2,7 +2,7 @@
 
 RSpec.describe Primes::Alg::SieveOfAtkin::Rust do
   let(:count) { 5 }
-  let(:args) { {limit: 10_000, count: count} }
+  let(:args) { { limit: 10_000, count: count } }
 
   let(:soa_rust) { described_class.new(**args) }
 

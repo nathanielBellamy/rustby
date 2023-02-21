@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Primes::Alg::Naive::Rust do
-  let(:args) { {limit: 10_000, count: 5} }
+  let(:args) { { limit: 10_000, count: 5 } }
   subject(:naive_rust) { described_class.new(**args) }
 
   describe "run" do

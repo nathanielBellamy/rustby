@@ -6,6 +6,7 @@ require_relative "base"
 
 module Primes
   module Alg
+    # compute primes in Ruby or Rust using the Sieve of Atkin Algorithm
     module SieveOfAtkin; end
   end
 end

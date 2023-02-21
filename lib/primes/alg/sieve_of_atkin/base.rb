@@ -3,6 +3,7 @@
 module Primes
   module Alg
     module SieveOfAtkin
+      # parent class of ::Ruby and ::Rust
       class Base
         attr_reader :alg_str, :limit, :count
 
@@ -17,12 +18,12 @@ module Primes
         end
 
         def self.public_run(limit: 2, count: 1)
-          lang_class = self.new(limit: limit, count: count)
+          lang_class = new(limit: limit, count: count)
           lang_class.run
         end
 
         def self.demo_fallback(limit: 2, count: 1)
-          lang_class = self.new(limit: limit, count: count)
+          lang_class = new(limit: limit, count: count)
           lang_class.demo_fallback
         end
       end

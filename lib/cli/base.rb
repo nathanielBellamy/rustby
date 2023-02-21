@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require "tty-spinner"
 
 module Cli
-    # provide cli functionality
+  # provide cli functionality
   class Base
     def welcome
       empty_lines
@@ -22,11 +24,11 @@ module Cli
     end
 
     def pause(duration, effect: false)
-      spinner_1 = TTY::Spinner.new(format: :bouncing_ball)
+      spinner = TTY::Spinner.new(format: :bouncing_ball)
       puts " *** " if effect
-      spinner_1.auto_spin
+      spinner.auto_spin
       sleep duration
-      spinner_1.success("")
+      spinner.success("")
     end
 
     def empty_line
@@ -38,6 +40,7 @@ module Cli
       empty_line
     end
 
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def tour
       welcome
       empty_lines
@@ -94,6 +97,7 @@ module Cli
       HEREDOC
       pause(7)
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
     def ruby_marker
       "💎RUBY"

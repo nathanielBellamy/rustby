@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../../lib/rustby"
 require "rutie"
 
@@ -6,9 +8,9 @@ namespace :primes do
        "Benchmark Ruby and Rust using all available algorithms. "
   task :benchmark do
     puts "\n\n Sieve of Atkin \n "
-    Rake::Task['primes:benchmark:sieve_of_atkin'].invoke(ARGV)
+    Rake::Task["primes:benchmark:sieve_of_atkin"].invoke(ARGV)
     puts "\n Naive \n "
-    Rake::Task['primes:benchmark:naive'].invoke(ARGV)
+    Rake::Task["primes:benchmark:naive"].invoke(ARGV)
   end
 
   namespace :benchmark do
@@ -31,11 +33,11 @@ namespace :primes do
         args: {
           limit: cli.limit,
           count: cli.count
-        },
+        }
       ).run
 
-      cli.lang_res(lang: 'ruby', result: results[:ruby])
-      cli.lang_res(lang: 'rust', result: results[:rust])
+      cli.lang_res(lang: "ruby", result: results[:ruby])
+      cli.lang_res(lang: "rust", result: results[:rust])
     end
 
     desc "💎🦀=>  rake primes:benchmark:naive {limit} {count}  =>  " \
@@ -57,11 +59,11 @@ namespace :primes do
         args: {
           limit: cli.limit,
           count: cli.count
-        },
+        }
       ).run
 
-      cli.lang_res(lang: 'ruby', result: results[:ruby])
-      cli.lang_res(lang: 'rust', result: results[:rust])
+      cli.lang_res(lang: "ruby", result: results[:ruby])
+      cli.lang_res(lang: "rust", result: results[:rust])
     end
   end
 end

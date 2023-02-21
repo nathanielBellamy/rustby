@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 RSpec.describe Services::Benchmarker do
   let(:mod) { Primes::Alg::SieveOfAtkin }
   let(:limit) { 10_000 }
   let(:count) { 2 }
-  let(:args) { {limit: limit, count: count} }
+  let(:args) { { limit: limit, count: count } }
 
   subject(:benchmarker) do
     described_class.new(
@@ -24,9 +26,9 @@ RSpec.describe Services::Benchmarker do
       it "it calls exactly once per phase of bmbm" do
         # verify that rust handles looping
         expect(RUST).to receive(:sieve_of_atkin)
-                          .with(limit, count)
-                          .exactly(2).times # rehersal and main phase of .bmbm
-                          .and_call_original
+          .with(limit, count)
+          .exactly(2).times # rehersal and main phase of .bmbm
+          .and_call_original
         benchmarker.run
       end
     end

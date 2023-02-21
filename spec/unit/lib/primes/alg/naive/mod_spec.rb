@@ -3,7 +3,7 @@
 RSpec.describe Primes::Alg::Naive do
   # limit is chosen to be further than what is stored in PRIMES_TO_10K
   # to prove correct dynamic computation
-  let(:args) { {limit: 15_000, count: 1} }
+  let(:args) { { limit: 15_000, count: 1 } }
   let(:soa_ruby) { Primes::Alg::Naive::Ruby.new(**args) }
   let(:soa_rust) { Primes::Alg::Naive::Rust.new(**args) }
 

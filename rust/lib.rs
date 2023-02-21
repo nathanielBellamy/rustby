@@ -26,7 +26,7 @@ class!(RUST);
 //  => functions here call their underlying rust function wrapped in panic::catch_unwind
 //  => if the underlying function panics, the function here catches+handles a Result::Err
 //  => if any error occurs, functions here return RustError::new(my_message)
-//  => rustby checks for RustErrors using Rustby.is_rust_error(my_result)
+//  => rustby checks for RustErrors using Rustby.rust_error?(my_result)
 methods!(
     RUST,
     _rtself,

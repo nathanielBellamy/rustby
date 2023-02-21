@@ -8,7 +8,7 @@ module Services
   class Benchmarker < Services::Base
     # run both the ruby module and the rust module
     # compare performance
-    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength
     def run
       ruby_res = nil
       rust_res = nil
@@ -25,6 +25,6 @@ module Services
 
       { ruby: ruby_res, rust: rust_res }
     end
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength
   end
 end

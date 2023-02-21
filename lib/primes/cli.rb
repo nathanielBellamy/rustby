@@ -1,8 +1,13 @@
+# frozen_string_literal: true
+
 require "tty-spinner"
 require_relative "../../lib/cli/mod"
 
 module Primes
-    # provide cli functionality
+  # provide cli functionality
+
+  # rubocop:disable Metrics/ClassLength
+  # TODO: impliment i18n
   class Cli < Cli::Base
     attr_reader :limit, :alg_str, :count, :mod
 
@@ -11,7 +16,7 @@ module Primes
       limit_invalid = limit < 2
       @limit = limit_invalid ? 1_000 : limit
       @alg_str = args[:alg_str] || "sieve_of_atkin"
-      @count = args[:count].to_i == 0 ? 1 : args[:count].to_i
+      @count = args[:count].to_i.zero? ? 1 : args[:count].to_i
     end
 
     def args
@@ -22,7 +27,7 @@ module Primes
       }
     end
 
-    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def benchmarking_intro(demo: false)
       if demo
         empty_lines
@@ -124,7 +129,7 @@ module Primes
         On my system I see Rust outperforming Ruby by a substantial margin on both passes.
       HEREDOC
     end
-    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
     def benchmarking
       puts " Benchmarking..."
@@ -168,4 +173,5 @@ module Primes
       empty_lines
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

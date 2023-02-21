@@ -4,7 +4,7 @@ RSpec.describe Primes::Cli do
   let(:limit) { 10_000 }
   let(:alg_str) { "sieve_of_atkin" }
   let(:count) { 2 }
-  let(:args) { {limit: limit, alg_str: alg_str, count: count} }
+  let(:args) { { limit: limit, alg_str: alg_str, count: count } }
 
   subject(:cli) do
     described_class.new(args)
@@ -40,7 +40,7 @@ RSpec.describe Primes::Cli do
           end
         end
 
-        context "when limit is decimal"  do
+        context "when limit is decimal" do
           let(:limit) { "1.283409875" }
 
           it "defaults to 1_000" do

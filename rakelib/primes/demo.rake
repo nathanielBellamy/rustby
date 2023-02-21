@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "../../lib/rustby"
 require "rutie"
 
@@ -10,7 +12,7 @@ namespace :primes do
 
       cli = Primes::Cli.new(
         limit: 5_432_10,
-        alg_string: 'sieve_of_atkin',
+        alg_string: "sieve_of_atkin",
         count: 10
       )
 
@@ -23,11 +25,11 @@ namespace :primes do
         args: {
           limit: cli.limit,
           count: cli.count
-        },
+        }
       ).run
 
-      cli.lang_res(lang: 'ruby', result: results[:ruby])
-      cli.lang_res(lang: 'rust', result: results[:rust])
+      cli.lang_res(lang: "ruby", result: results[:ruby])
+      cli.lang_res(lang: "rust", result: results[:rust])
 
       cli.benchmarking_outro
       cli.outro
@@ -40,7 +42,7 @@ namespace :primes do
 
       cli = Primes::Cli.new(
         limit: ARGV[1],
-        alg_string: 'sieve_of_atkin',
+        alg_string: "sieve_of_atkin",
         count: ARGV[2]
       )
 
@@ -55,7 +57,7 @@ namespace :primes do
         }
       ).run
 
-      cli.full_res(lang: 'ruby', result: results)
+      cli.full_res(lang: "ruby", result: results)
 
       cli.outro
     end

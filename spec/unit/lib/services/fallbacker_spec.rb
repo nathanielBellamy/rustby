@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 RSpec.describe Services::Fallbacker do
   let(:mod) { Primes::Alg::SieveOfAtkin }
   let(:func) { "public_run" }
   let(:limit) { 10_000 }
   let(:count) { 2 }
-  let(:args) { {limit: limit, count: count} }
+  let(:args) { { limit: limit, count: count } }
 
   subject(:fallbacker) do
     described_class.new(
