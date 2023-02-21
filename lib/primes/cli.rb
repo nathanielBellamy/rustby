@@ -80,29 +80,28 @@ module Primes
          In this case, the flow is:
 
           1. Fallbacker calls
-                Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: #{limit}, count: #{count}) (🦀)
+                `Primes::Alg::SieveOfAtkin::Rust.demo_fallback(limit: #{limit}, count: #{count})` (🦀)
 
-          2. such a method would on the ::Rust class should wrap a call to a computational method on the RUST class
+          2. such a method on the ::Rust class should wrap a computational method on the RUST bridge class
 
-          3. for the purposes of this demonstration, it wraps a call to RUST.make_rust_panic
+          3. for the purposes of this demonstration, it wraps a call to `RUST.make_rust_panic`
 
-          4. Rust code will catch this panic and return an error to Ruby
+          4. Rust code in `rust/lib.rs` will catch this panic and return an error to Ruby
 
           5. Fallbacker receives the error and completes the computation by calling
-                 Primes::Alg::SieveOfAtkin::Ruby.demo_fallback(limit: #{limit}, count: #{count}) (💎)
+                 `Primes::Alg::SieveOfAtkin::Ruby.demo_fallback(limit: #{limit}, count: #{count})` (💎)
       HEREDOC
       empty_line
-      pause(15, effect: true)
+      pause(20, effect: true)
       puts <<-HEREDOC
          After the computation has run, you should see a Rust error reported to the console:
 
              thread '<unnamed>' panicked at 'RUST PANIC!', rust/test/panic_on_purpose.rs:7:9
-             note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
          You should also see the full results that will have been computed in Ruby.
       HEREDOC
       empty_lines
-      pause(10, effect: true)
+      pause(12, effect: true)
       puts <<-HEREDOC
          Let's see it in action:
       HEREDOC
@@ -132,7 +131,8 @@ module Primes
     # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
     def benchmarking
-      puts " Benchmarking..."
+      empty_lines
+      puts "      Benchmarking..."
     end
 
     def self.alg_not_found

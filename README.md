@@ -3,18 +3,21 @@
 ### 💎 Ruby w. Embedded Rust 🦀 (thx. to [rutie](https://github.com/danielpclark/rutie))
 ### [GH Project](https://github.com/users/nathanielBellamy/projects/2)
 
-#### Build in Ruby  ->  Optimize (Sting) with Rust  ->  Fall Back on Ruby (if it doesn't work out)
+#### Fly with Ruby  ->  Sting with Rust  ->  Fall Back on Ruby (if it doesn't work out)
 
 ## intro to 🦀rustby🐝
 
 - Build in [Ruby](https://www.ruby-lang.org/en/)
-  - maintain full functionality in Ruby
+  - develop at speed in Ruby
+  - maintain all functionality in Ruby
 - Optimize in [Rust](https://www.rust-lang.org/)
   - translate performance sensitive operations into Rust
-  - compare Ruby and Rust performance using [Benchmarker](https://github.com/nathanielBellamy/rustby/blob/main/lib/services/benchmarker.rb#L8)
+  - compare Ruby and Rust performance using [`Benchmarker`](lib/services/benchmarker.rb)
+    ![benchmark](benchmark_demo.png "rake primes:benchmark:sieve_of_atking 6543210 10")
 - Fallback on Ruby
   - worst case, it's Ruby
-  - wrap your Rust code in a default Ruby implimentation using [Fallbacker](https://github.com/nathanielBellamy/rustby/blob/main/lib/services/fallbacker.rb#L8)
+  - wrap your Rust code in a default Ruby implimentation using [`Fallbacker`](lib/services/fallbacker.rb)
+    ![fallback](fallback_demo.png "rake primes:demo:fallback")
 
 ### motivation
 
@@ -33,10 +36,21 @@
     - runs `rspec` and `cargo test`
     - builds Rust code before running `rspec`
 
-#### primes
+#### Primes
 
-  - `Primes` is the example module around which 🦀rustby🐝 has been built
-  - algorithms to compute primes have been constructed in both ruby and rust
+  - 🦀rustby🐝 made use of `Primes` as the example module around which to build
+  - it contains two modules to compute primes
+    - [`Primes::Alg::SieveOfAtkin`](lib/primes/alg/sieve_of_atkin/mod.rb) and [`Primes::Alg::Naive`](lib/primes/alg/naive/mod.rb)
+    - Each module computes primes using a different algorithm
+      - each algorithm is provided in both Ruby and Rust via a computational class:
+        - [`Primes::Alg::SieveOfAtkin::Ruby`](lib/primes/alg/sieve_of_atkin/ruby.rb)
+        - [`Primes::Alg::SieveOfAtkin::Rust`](lib/primes/alg/sieve_of_atkin/rust.rb)
+        - [`Primes::Alg::Naive::Ruby`](lib/primes/alg/naive/ruby.rb)
+        - [`Primes::Alg::Naive::Rust`](lib/primes/alg/naive/rust.rb)
+      - while overkill for computing primes, this demonstrates the nesting pattern:
+        - `MyComputationalModule`
+          -  `MyComputationalModule::Ruby`
+          -  `MyComputationalModule::Rust`
   - args
     - `{limit} - 💎Integer, 🦀u64`
       - compute all primes less than or equal to
