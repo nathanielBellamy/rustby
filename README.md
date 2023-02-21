@@ -25,6 +25,9 @@
 
 - to tour
   - `rake main`
+- to compute primes
+  - `rake primes:ruby {limit}`
+  - `rake primes:rust {limit}`
 - to run tests
   - `rake spec:run`
     - runs `rspec` and `cargo test`
@@ -32,7 +35,7 @@
 
 #### primes
 
-  - primes is the example module around which 🦀rustby🐝 has been built
+  - `Primes` is the example module around which 🦀rustby🐝 has been built
   - algorithms to compute primes have been constructed in both ruby and rust
   - args
     - `{limit} - 💎Integer, 🦀u64`
