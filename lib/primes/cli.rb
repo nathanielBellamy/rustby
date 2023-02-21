@@ -8,16 +8,18 @@ module Primes
 
     def initialize(args)
       limit = args[:limit].to_i
-      limit_invalid =  limit < 2
+      limit_invalid = limit < 2
       @limit = limit_invalid ? 1_000 : limit
       @alg_str = args[:alg_str] || "sieve_of_atkin"
       @count = args[:count].to_i == 0 ? 1 : args[:count].to_i
     end
 
     def args
-      @args ||= { limit: @limit,
-                  alg_str: @alg_str,
-                  count: @count }
+      @args ||= {
+        limit: @limit,
+        alg_str: @alg_str,
+        count: @count
+      }
     end
 
     # rubocop:disable Metrics/MethodLength
@@ -159,7 +161,7 @@ module Primes
       empty_lines
       puts <<-HEREDOC
                   **********************
-                      #{lang_marker}"
+                         #{lang_marker}
                   **********************
       HEREDOC
       puts result

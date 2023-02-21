@@ -50,7 +50,7 @@ module Cli
       empty_lines
       pause(7)
       puts <<-HEREDOC
-          🦀rustby🐝 provides two basic service classes to enforce this pattern:
+          🦀rustby🐝 provides two basic service classes to establish this pattern:
       HEREDOC
       empty_lines
       pause(7)
@@ -59,9 +59,12 @@ module Cli
                 => pass in a computation module with both a Ruby and a Rust class
                       MyComputation::Ruby, MyComputation::Rust
                 => demonstrate performance in Rust compared to Ruby
+                => a thin wrapper around Ruby's Benchmark class
       HEREDOC
       empty_line
-      puts " ...and..."
+      puts <<-HEREDOC
+                        "...and..."
+      HEREDOC
       empty_line
       pause(7)
       puts <<-HEREDOC

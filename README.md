@@ -18,18 +18,13 @@
 
 ### motivation
 
-- Ruby wins in development speed
-- Rust wins in computational speed
-- Build day-to-day in Ruby
-- Use the speed of Rust when you need it
+- Ruby for development
+- Rust for speed
 
 ### to run:
 
-- clone repo + run
+- to tour
   - `rake main`
-  - `rake --tasks`
-  - `rake build:main`
-    - bundle gems and build rust
 - to run tests
   - `rake spec:run`
     - runs `rspec` and `cargo test`
