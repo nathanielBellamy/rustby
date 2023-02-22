@@ -42,9 +42,9 @@ module Primes
         pause(1)
       end
       puts <<-HEREDOC
-            1. Find primes up to #{limit}."
-            2. Run each computation #{count} time(s) in both Ruby and Rust."
-            3. Record and display performance data using Ruby's Benchmark class."
+            1. Find primes up to #{limit}.
+            2. Run each computation #{count} time(s) in both Ruby and Rust.
+            3. Record and display performance data using Ruby's Benchmark class.
       HEREDOC
       empty_lines
       pause(5, effect: true)
