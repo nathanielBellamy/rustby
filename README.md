@@ -1,37 +1,35 @@
 # 🦀rustby🐝
 
-### 💎 Ruby w. Embedded Rust 🦀 (thx. to [rutie](https://github.com/danielpclark/rutie))
+### 💎 Ruby containing Rust 🦀 (thx. to [rutie](https://github.com/danielpclark/rutie))
 ### [GH Project](https://github.com/users/nathanielBellamy/projects/2)
 
-#### Fly with Ruby  ->  Sting with Rust  ->  Fall Back on Ruby (if it doesn't work out)
+#### Ruby for Development  ->  Rust for Speed
 
-## intro to 🦀rustby🐝
+## intro
 
 - Build in [Ruby](https://www.ruby-lang.org/en/)
-  - develop at speed in Ruby
   - maintain all functionality in Ruby
 - Optimize in [Rust](https://www.rust-lang.org/)
   - translate performance sensitive operations into Rust
   - compare Ruby and Rust performance using [`Benchmarker`](lib/services/benchmarker.rb)
+  
     ![benchmark](benchmark_demo.png "rake primes:benchmark:sieve_of_atking 6543210 10")
 - Fallback on Ruby
   - worst case, it's Ruby
   - wrap your Rust code in a default Ruby implimentation using [`Fallbacker`](lib/services/fallbacker.rb)
+  
     ![fallback](fallback_demo.png "rake primes:demo:fallback")
-
-### motivation
-
-- Ruby for development
-- Rust for speed
 
 ### to run:
 
-- to tour
+- tour
   - `rake main`
-- to compute primes
+  - `rake primes:demo:benchmark {limit} {count}`
+  - `rake primes:demo:fallback {limit} {count}`
+- compute primes
   - `rake primes:ruby {limit}`
   - `rake primes:rust {limit}`
-- to run tests
+- run tests
   - `rake spec:run`
     - runs `rspec` and `cargo test`
     - builds Rust code before running `rspec`
