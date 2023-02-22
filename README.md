@@ -61,7 +61,7 @@
     - `{alg_str} - 💎String`
       - select algorithm for computation
       - can be:
-        - `sieve_of_at, soa, s`
+        - `sieve_of_atkin, soa, s`
         - `naive, n`
 
 ##### demo 🦀rustby🐝 using primes
